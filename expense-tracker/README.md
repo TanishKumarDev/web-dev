@@ -4,7 +4,7 @@ Welcome to the Expense Tracker App! This is a simple app where you can add and m
 
 ### Project Demo
 
-![Demo Image](public/demo.png)
+![Preview Image](public/preview.png)
 
 ### Step 1: JavaScript Logic
 

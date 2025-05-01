@@ -35,7 +35,7 @@ Instead of passively watching tutorials, I’m actively learning by:
 
 | Sn | Project Name         | About the Project                                      | Live Preview |
 |-----|----------------------|--------------------------------------------------------|--------------|
-| 1   | Expense Tracker      | A simple expense tracker using `useState`, `props`, and controlled components to manage and display user input. | [Live](https://expense-tracker-silk-eta.vercel.app/) |
+| 1   | Expense Tracker      | A simple expense tracker using `useState`, `props`, and controlled components to manage and display user input. | [Live](https://web-development-mastery.vercel.app/) |
 | 2   | Color Switcher UI    | A UI to change the background color using `useState`, event handling, and dynamic styling with Tailwind. | *Coming Soon* |
 | 3+  | More Coming Soon...  | Projects involving routing, forms, API integration, authentication, and more. | — |
 ---

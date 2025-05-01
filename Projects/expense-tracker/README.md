@@ -10,7 +10,7 @@ Track your expenses easily with a modern UI built using **React** and **Tailwind
 ---
 
 ### 🔗 Live Preview  
-[Click here to view the live site](https://expense-tracker-silk-eta.vercel.app/)
+[Click here to view the live site](https://web-development-mastery.vercel.app/)
 
 ---
 
@@ -49,7 +49,7 @@ src/
 
 ```bash
 # Clone the repo
-git clone https://github.com/TanishKumarDev/React_Mastery/tree/3ce240aa25e713af686c3477093b00ead9918fe0/expense-tracker
+git clone https://github.com/TanishKumarDev/WebDevelopment_Mastery/tree/eff583bd68b112cec8bf83e9269602b252788b49/Projects/expense-tracker
 
 # Navigate into the folder
 cd expense-tracker

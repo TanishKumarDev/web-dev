@@ -1,61 +1,80 @@
-# 🚀 React Mastery: Practice Projects
+# 🚀 Web Development Mastery: Practice Projects
 
-Welcome to my React Mastery repository!  
-This repo is dedicated to learning React.js the **practical** way — through hands-on coding, small projects, and real-world use cases.
-
-## 📌 What This Repo Contains
-
-- ✅ Mini projects built using **core React concepts**
-- ✅ Incremental learning approach — from beginner to advanced
-- ✅ Organized codebase with reusable components
-- ✅ Clean folder structure and modular development
-- ✅ Focus on writing readable, scalable React code
-
-## 🧠 Why This Exists
-
-Most tutorials just explain the "what", not the "why".  
-This repository is my **learning-in-public journey** to truly understand React by:
-- Practicing real UI features
-- Debugging actual errors
-- Building confidence in state, props, hooks, events, and components
-
-## 🛠 Projects I'm Working On
-
-| Day | Project                | Concepts Covered                     |
-|-----|------------------------|--------------------------------------|
-| 1   | Expense Tracker (WIP)  | useState, props, components, forms   |
-| 2   | TBA                    | ...                                  |
-
-_(More projects coming soon!)_
-
-## 🚧 Work in Progress
-
-This is a **learning-first** repo. You may find:
-- Errors, bugs, and debugging attempts
-- Code improvements and refactoring as I grow
-- Honest mistakes that help me learn better
-
-## 📖 Tech Stack
-
-- React (with Create React App)
-- JavaScript (ES6+)
-- HTML & CSS (Basic styling)
-- VS Code as primary editor
-
-## 📚 Learning Goals
-
-- Master React fundamentals (JSX, props, state, hooks)
-- Build real, functioning UIs
-- Prepare for bigger MERN stack projects
-- Gain confidence in debugging & refactoring
-
-## 🤝 Connect with Me
-
-If you're learning too — let's grow together!
-
-- 🔗 [LinkedIn](https://linkedin.com/in/yourprofile)
-- 🐙 [GitHub](https://github.com/yourusername)
+Welcome to my **Web Dev Mastery** repository!  
+This repo is part of my journey to become a skilled full-stack web developer by building real-world projects and learning through hands-on experience.
 
 ---
 
-Made with 💙 while learning React step-by-step.
+## 📌 What This Repository Is About
+
+This is not just about writing code — it's about **understanding** web development from the ground up. I'm focusing on both frontend (React, HTML, CSS, JavaScript) and full-stack principles as I grow.
+
+### ✅ Key Highlights
+
+- 🧩 Real, functional mini-projects
+- 🛠️ Concepts from HTML, CSS, JS to React & more
+- 💡 Focus on fundamentals and practical UI/UX building
+- 📁 Clean folder structures and modular code
+- 🚀 Deployments with Vercel for every project
+
+---
+
+## 🧠 Why This Exists
+
+Instead of passively watching tutorials, I’m actively learning by:
+
+- Building small apps & features
+- Practicing component-based design
+- Understanding React deeply (hooks, state, props)
+- Experimenting with UI design using Tailwind CSS
+- Preparing for larger **MERN stack** projects
+
+---
+
+## 🛠 Projects in This Repo
+
+| Sn | Project Name         | About the Project                                      | Live Preview |
+|-----|----------------------|--------------------------------------------------------|--------------|
+| 1   | Expense Tracker      | A simple expense tracker using `useState`, `props`, and controlled components to manage and display user input. | [Live](https://expense-tracker-silk-eta.vercel.app/) |
+| 2   | Color Switcher UI    | A UI to change the background color using `useState`, event handling, and dynamic styling with Tailwind. | *Coming Soon* |
+| 3+  | More Coming Soon...  | Projects involving routing, forms, API integration, authentication, and more. | — |
+---
+
+## 📚 Tech Stack
+
+- ⚛️ **React** (Vite / CRA)
+- 🎨 **Tailwind CSS**
+- 🧠 **JavaScript** (ES6+)
+- 🧱 **HTML & CSS**
+- 🧰 **VS Code** as my primary code editor
+
+---
+
+## 🎯 Learning Goals
+
+- 🔤 Master HTML, CSS, JS – Build real UIs, not just layouts. Know how the web actually works.
+- ⚛️ React Core Mastery – JSX, state, props, hooks, components — from syntax to scalable structure.
+- 🔁 Understand State & Data Flow – Local/global state, lifting state, context API, Redux.
+- 🖼️ Craft Responsive UIs – Flexbox, Grid, Tailwind. Pixel-perfect design, mobile-first thinking.
+- 🌐 API Integration – Work with real-world APIs, handle loading, errors, and async logic.
+- 🌍 Think Full-Stack – Learn backend basics: Node.js, Express, MongoDB, REST principles.
+- 📦 Use Git & GitHub Professionally – Clear commits, branches, pull requests  team-ready workflows.
+- 🧪 Debug Like a Developer – Use devtools smartly, write clean logs, solve real issues, not guesswork.
+- 🚀 Deploy & Deliver – Use Vercel/Netlify to ship working apps with build tools like Vite/Webpack.
+- 💡 Write Problem-Solving UI Code – Build with logic: filtering, searching, throttling, dynamic rendering.
+- 🧠 Focus on UX & Real Use Cases – Accessibility, loading states, feedback — make it feel human.
+- 📚 Refactor & Document – Write clean code, reflect, improve — grow as a developer.
+
+
+---
+
+## 🤝 Let’s Connect
+
+If you're also learning or working on web dev — let's grow together!
+
+🔗 [LinkedIn](https://www.linkedin.com/in/tanish29/) ・ 🐙 [GitHub](https://github.com/TanishKumarDev) ・ 🐤 [X](https://x.com/tanish_29)
+
+
+---
+
+> Made with 💙 by learning in public — one commit at a time.

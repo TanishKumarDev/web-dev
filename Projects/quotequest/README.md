@@ -56,20 +56,17 @@ quotequest/
 
 Repo - https://github.com/TanishKumarDev/WebDevelopment_Mastery/tree/b9f7c6f5983038afb59af9604aacae7b54992d08/Projects/quotequest
 
-
----
-
+```
 ## ⚙️ **Plain JavaScript Quote Fetch Logic**
 
-```js
+```javascript
 // Fetch a random quote from a public API
 fetch("https://api.quotable.io/random")
   .then((res) => res.json())
   .then((data) => {
     console.log(data.content, data.author);
   });
-```
-
+  ```
 ---
 
 ## 🙌 **Acknowledgements**

@@ -1,8 +1,4 @@
-Sure bhai! Here's the **corrected and structured README** for your **QuoteQuest App**:
-
----
-
-# 💸 **QuoteQuest App**
+# 🪴 **QuoteQuest App**
 
 *Quote Quest: A Journey to Your Highest Truth & Potential Through Self-discovery.*
 
@@ -16,7 +12,7 @@ Sure bhai! Here's the **corrected and structured README** for your **QuoteQuest 
 
 ### 🔗 **Live Preview**
 
-[Click here to view the live site](https://web-development-mastery.vercel.app/)
+[Click here to view the live site](https://web-development-mastery-jwpw-hmvdu45u9-tanish-kumars-projects.vercel.app/)
 
 ---
 
@@ -56,18 +52,10 @@ quotequest/
 ## 🚀 **Getting Started**
 
 ```bash
-# Clone the repository
-git clone https://github.com/TanishKumarDev/WebDevelopment_Mastery.git
+# Download the repository
 
-# Navigate to the project folder
-cd Projects/quotequest
+Repo - https://github.com/TanishKumarDev/WebDevelopment_Mastery/tree/b9f7c6f5983038afb59af9604aacae7b54992d08/Projects/quotequest
 
-# Install dependencies
-npm install
-
-# Run the app locally
-npm run dev
-```
 
 ---
 

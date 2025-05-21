@@ -5,11 +5,11 @@
 // Note: We are using Node.js, not browser
 
 // Bad practice: Unreadable code
-// console.log(3 + 3)console.log("Hitesh"); // Avoid
+// console.log(3 + 3)console.log("Tanish"); // Avoid
 
 // Good practice: Readable code
 console.log(3 + 3); // Output: 6
-console.log("Tanish"); // Output: Hitesh
+console.log("Tanish"); // Output: Tanish
 
 // Primitive Data Types
 let username = "Tanish"; // String

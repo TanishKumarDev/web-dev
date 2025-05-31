@@ -1,7 +1,3 @@
-```javascript
-// File: 02_basics/02_arrays.js
-// Purpose: Practice advanced JavaScript array methods
-
 // Array Declaration
 let marvelHeroes = ["Thor", "Ironman", "Spiderman"];
 let dcHeroes = ["Superman", "Flash", "Batman"];
@@ -50,4 +46,4 @@ console.log(Array.of(score1, score2, score3)); // Output: [100, 200, 300]
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of
-```
+

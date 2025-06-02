@@ -22,6 +22,39 @@ console.log(undefined > 0); // Output: false
 console.log(undefined < 0); // Output: false
 // Note: undefined always returns false for >, <, ==
 
+/*
+Key Rule: undefined comparisons with numbers ALWAYS return false
+
+Case 1: Equality comparison (==)
+console.log(undefined == 0); // false
+- undefined represents "no value"
+- Cannot be equal to any number
+- Even loose equality (==) returns false
+
+Case 2: Greater than comparison (>)
+console.log(undefined > 0); // false
+- JS tries to convert undefined to number
+- Number(undefined) becomes NaN
+- NaN > 0 is always false
+
+Case 3: Less than comparison (<) 
+console.log(undefined < 0); // false
+- Same as above:
+- undefined converts to NaN
+- NaN < 0 is always false
+
+Summary Table:
+Expression        | Result | Reason
+-----------------|--------|------------------
+undefined == 0   | false  | Cannot equate undefined to numbers
+undefined > 0    | false  | NaN comparisons are always false
+undefined < 0    | false  | NaN comparisons are always false
+
+Best Practice:
+- Avoid comparing undefined with numbers
+- Always check for undefined explicitly using typeof or === undefined
+*/
+
 // Strict equality
 console.log("2" === 2); // Output: false (different types: string vs. number)
 console.log(2 === 2); // Output: true (same type and value)

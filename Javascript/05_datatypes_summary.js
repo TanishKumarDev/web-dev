@@ -18,12 +18,14 @@ let scoreValue = 3.3; // Number (no separate float type)
 let isLoggedIn = false; // Boolean
 let temperature = null; // Null (e.g., no temperature data)
 let userEmail; // Undefined (or explicitly: let userEmail = undefined)
-let id = Symbol("123"); // Symbol (unique)
+let id = Symbol("123"); // Symbol (unique) // Symbol is used to create a unique and immutable value
 let anotherId = Symbol("123"); // Symbol (unique, not equal to id)
 let bigNumber = 12345678901234567890n; // BigInt (append n)
 
 // Verify Symbol uniqueness
 console.log(id === anotherId); // Output: false
+// because id and anotherId are two different symbols, they are not equal
+// Symbols are unique and immutable, so they are not equal
 
 // Non-Primitive (Reference) Data Types (Call by Reference)
 // Reference to memory location; changes affect the original

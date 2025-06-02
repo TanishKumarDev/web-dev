@@ -39,9 +39,11 @@ This repo is a mix of:
 
 | Sn  | Project Name        | About the Project                                                                 | Live Preview                                              | Codebase / Repo Link                                    |
 |-----|---------------------|------------------------------------------------------------------------------------|------------------------------------------------------------|---------------------------------------------------------|
-| 1   | Expense Tracker     | A simple expense tracker using `useState`, `props`, and controlled components.     | [Live](https://web-development-mastery.vercel.app/)        | [Code](https://github.com/TanishKumarDev/web-dev-mastery/tree/main/expense-tracker) |
-| 2   | Color Switcher UI   | Change background color using `useState`, event handling, and Tailwind styling.    | *Coming Soon*                                              | [Code](https://github.com/TanishKumarDev/web-dev-mastery/tree/main/color-switcher-ui) |
-| 3+  | More Coming Soon... | Projects with routing, forms, APIs, auth, backend logic, and advanced React.       | —                                                          | —                                                       |
+| 1   | Color Flipper      | Simple DOM project that changes background colors randomly. Learn DOM manipulation, events, and Math operations. | [Live Demo](https://colorflipper-nu.vercel.app/) | [Source Code](https://github.com/TanishKumarDev/web-dev-journey/tree/main/Projects/Color%20Flipper) |
+| 2   | Counter            | Interactive counter with color-coded values. Practice DOM events, styling, and state management. | [Live Demo](https://counter-nine-weld.vercel.app/) | [Source Code](https://github.com/TanishKumarDev/web-dev-journey/tree/main/Projects/Counter) |
+| 3   | Smart Budget Buddy | Budget tracker with categories, analytics, and real-time updates. Master forms, state, and DOM updates. | [Live Demo](https://smartbudgetbuddy.vercel.app/) | [Source Code](https://github.com/TanishKumarDev/web-dev-journey/tree/main/Projects/Smart%20Budget%20Buddy) |
+| 4   | Coming Soon... | More projects with routing, forms, APIs, auth, backend logic, and advanced React. | —                                                          | —                                                       |
+
 
 
 ## 📚 Tech Stack
@@ -72,7 +74,7 @@ This repo is a mix of:
 
 
 
-## 🤝 Let’s Connect
+## 🤝 Let's Connect
 
 If you're also learning or working on web dev — let's grow together!
 

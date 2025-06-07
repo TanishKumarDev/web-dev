@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Variables Demo</title>
+  <style>
+    /* Basic styling for clarity */
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 10px;
+    }
+    button {
+      padding: 8px;
+      margin: 5px;
+    }
+    #demo {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Variables Demo</h1>
+  <p>This page demonstrates JavaScript variables with string-focused examples.</p>
+  <div id="demo">Initial Content</div>
+  <button onclick="updateVariables()">Update Variables</button>
+
+  <script>
+    /*
+     * JavaScript Variables - Explanation and Demo
+     * 
+     * This guide explains the W3Schools "JavaScript Variables" tutorial, covering:
+     * 1. Variable Declaration: Automatic, var, let, const
+     * 2. When to Use var, let, const: Best practices
+     * 3. Variables Like Algebra: Storing and computing values
+     * 4. Identifiers: Naming rules for variables
+     * 5. Assignment Operator: = vs. ==
+     * 6. Data Types: Numbers and strings
+     * 7. Declaring and Assigning: Syntax and practices
+     * 8. Multiple Variables: Comma-separated declarations
+     * 9. Undefined Variables: Default value
+     * 10. Re-Declaring Variables: Behavior with var, let, const
+     * 11. Arithmetic and String Operations: Using variables
+     * 12. Dollar Sign and Underscore: Valid identifiers
+     * 13. Strings in Variables: Emphasis on string usage
+     * 14. Exercise: Incorrect variable declaration syntax
+     * 
+     * Key Points:
+     * - Variables store data using var, let, const, or automatic declaration
+     * - const for unchanging values; let for reassignable; var for legacy code
+     * - Strings are a key data type, often used in variable assignments
+     * - Identifiers are case-sensitive and follow strict naming rules
+     * 
+     * Current Date: June 08, 2025
+     */
+
+    // =============================================
+    // 1. VARIABLE DECLARATION
+    // =============================================
+    /*
+     * Variables can be declared in four ways:
+     * - Automatic: Undeclared, created on first use (not recommended)
+     * - var: Legacy keyword (1995-2015)
+     * - let: Block-scoped, reassignable (ES2015)
+     * - const: Block-scoped, non-reassignable (ES2015)
+     * Example: Different declarations with strings and numbers.
+     */
+
+    // Automatic declaration (not recommended)
+    autoX = 5;
+    autoY = 6;
+    autoZ = autoX + autoY;
+    console.log("Automatic declaration:", autoX, autoY, autoZ); // 5 6 11
+
+    // var declaration
+    var varX = 5;
+    var varY = 6;
+    var varZ = varX + varY;
+    console.log("var declaration:", varX, varY, varZ); // 5 6 11
+
+    // let declaration
+    let letX = 5;
+    let letY = 6;
+    let letZ = letX + letY;
+    console.log("let declaration:", letX, letY, letZ); // 5 6 11
+
+    // const declaration
+    const constX = 5;
+    const constY = 6;
+    const constZ = constX + constY;
+    console.log("const declaration:", constX, constY, constZ); // 5 6 11
+
+    // Mixed example with strings
+    const name1 = "John";
+    const name2 = "Doe";
+    let fullName = name1 + " " + name2;
+    console.log("Mixed declaration:", name1, name2, fullName); // John Doe John Doe
+
+    // =============================================
+    // 2. WHEN TO USE var, let, const
+    // =============================================
+    /*
+     * Best practices:
+     * - Always declare variables
+     * - Use const for constants (values or types that won't change)
+     * - Use let for variables that need reassignment
+     * - Use var only for old browsers
+     * Example: Demonstrate const and let with strings.
+     */
+
+    const siteName = "W3Schools"; // Constant string
+    let userName = "Alice"; // Reassignable string
+    userName = "Bob"; // Valid reassignment
+    // siteName = "Other"; // Error: Cannot reassign const
+    console.log("const and let:", siteName, userName); // W3Schools Bob
+
+    // =============================================
+    // 3. VARIABLES LIKE ALGEBRA
+    // =============================================
+    /*
+     * Variables store values and can be used in expressions, like algebra.
+     * Example: Algebraic operations with numbers and strings.
+     */
+
+    let x = 5;
+    let y = 6;
+    let z = x + y;
+    console.log("Algebraic expression:", z); // 11
+
+    let greeting = "Hello, " + userName; // String expression
+    console.log("String expression:", greeting); // Hello, Bob
+
+    // =============================================
+    // 4. IDENTIFIERS
+    // =============================================
+    /*
+     * Identifiers are unique variable names, following rules:
+     * - Start with letter, _, or $
+     * - Can include letters, digits, _, $
+     * - Case-sensitive
+     * - Cannot be reserved words
+     * Example: Valid identifiers with strings.
+     */
+
+    let $greeting = "Hi";
+    let _name = "Tom";
+    let userName2 = "Jane";
+    console.log("Identifiers:", $greeting, _name, userName2); // Hi Tom Jane
+
+    // Invalid identifier (commented to avoid error):
+    // let 2name = "Invalid"; // Starts with number
+
+    // =============================================
+    // 5. ASSIGNMENT OPERATOR
+    // =============================================
+    /*
+     * The = operator assigns values, not equality (== is for comparison).
+     * Example: Assignment vs. algebraic confusion.
+     */
+
+    let a = 10;
+    a = a + 5; // Assigns a + 5 to a
+    console.log("Assignment operator:", a); // 15
+
+    let text = "Hello";
+    text = text + " World"; // String concatenation
+    console.log("String assignment:", text); // Hello World
+
+    // =============================================
+    // 6. DATA TYPES
+    // =============================================
+    /*
+     * Variables hold numbers or strings (text).
+     * Strings use quotes; numbers don't.
+     * Quoted numbers are treated as strings.
+     * Example: Numbers and strings.
+     */
+
+    const pi = 3.14; // Number
+    let person = "John Doe"; // String
+    let answer = 'Yes I am!'; // String
+    console.log("Data types:", pi, person, answer); // 3.14 John Doe Yes I am!
+
+    let quotedNum = "100";
+    console.log("Quoted number (string):", typeof quotedNum); // string
+
+    // =============================================
+    // 7. DECLARING AND ASSIGNING
+    // =============================================
+    /*
+     * Declare with var, let, or const; assign with =.
+     * Can assign during declaration or later.
+     * Example: Declare and assign strings.
+     */
+
+    let carName; // Declare
+    carName = "Volvo"; // Assign
+    let carModel = "XC90"; // Declare and assign
+    console.log("Declaration and assignment:", carName, carModel); // Volvo XC90
+
+    // DOM output
+    document.getElementById("demo").innerHTML = carName;
+
+    // =============================================
+    // 8. MULTIPLE VARIABLES
+    // =============================================
+    /*
+     * Declare multiple variables in one statement using commas.
+     * Can span multiple lines.
+     * Example: Multiple string variables.
+     */
+
+    let personName = "John Doe", vehicle = "Volvo", cost = 200;
+    console.log("Multiple variables:", personName, vehicle, cost); // John Doe Volvo 200
+
+    let fruit = "Apple",
+        color = "Red",
+        weight = 150;
+    console.log("Multi-line declaration:", fruit, color, weight); // Apple Red 150
+
+    // =============================================
+    // 9. UNDEFINED VARIABLES
+    // =============================================
+    /*
+     * Variables declared without a value are undefined.
+     * Example: Undefined variable.
+     */
+
+    let undefinedVar;
+    console.log("Undefined variable:", undefinedVar); // undefined
+
+    // =============================================
+    // 10. RE-DECLARING VARIABLES
+    // =============================================
+    /*
+     * var allows re-declaration without losing value; let and const do not.
+     * Example: Re-declaration with var.
+     */
+
+    var redeclareCar = "Volvo";
+    var redeclareCar; // Still Volvo
+    console.log("Re-declared with var:", redeclareCar); // Volvo
+
+    // let redeclareTest = "Test";
+    // let redeclareTest; // Error: Cannot re-declare with let
+
+    // =============================================
+    // 11. ARITHMETIC AND STRING OPERATIONS
+    // =============================================
+    /*
+     * Variables support arithmetic and string concatenation.
+     * Quoted numbers cause string concatenation.
+     * Example: Arithmetic and string operations.
+     */
+
+    let numSum = 5 + 2 + 3;
+    console.log("Number sum:", numSum); // 10
+
+    let strConcat = "John" + " " + "Doe";
+    console.log("String concatenation:", strConcat); // John Doe
+
+    let mixed1 = "5" + 2 + 3; // String concatenation
+    console.log("Quoted number:", mixed1); // 523
+
+    let mixed2 = 2 + 3 + "5"; // Number sum, then string
+    console.log("Number then string:", mixed2); // 55
+
+    // =============================================
+    // 12. DOLLAR SIGN AND UNDERSCORE
+    // =============================================
+    /*
+     * $ and _ are valid in identifiers, though $ is rare except in libraries (e.g., jQuery).
+     * _ is used for "private" variables.
+     * Example: $ and _ identifiers.
+     */
+
+    let $message = "Hello World";
+    let $$$ = 2;
+    let $myMoney = 5;
+    let _lastName = "Johnson";
+    console.log("Special identifiers:", $message, $$$, $myMoney, _lastName); // Hello World 2 5 Johnson
+
+    // =============================================
+    // 13. STRINGS IN VARIABLES
+    // =============================================
+    /*
+     * Strings are a key data type, used in variables for DOM updates and concatenation.
+     * Example: Combine variable operations with string manipulation.
+     */
+
+    function updateVariables() {
+      const site = "JavaScript"; // const string
+      let input = "  learn javascript  "; // let string
+      let formatted = input.trim().toUpperCase(); // String manipulation
+      let output = `${site}: ${formatted}`; // Template literal
+      document.getElementById("demo").innerHTML = output;
+      console.log("Updated variables:", output); // JavaScript: LEARN JAVASCRIPT
+      return output;
+    }
+
+    updateVariables();
+
+    // =============================================
+    // 14. EXERCISE EXAMPLE
+    // =============================================
+    /*
+     * Exercise: What is NOT a correct syntax for declaring variables?
+     * Options: let x;, dim x;, var x;, const x;
+     * Correct Answer: dim x; (dim is not a JavaScript keyword)
+     */
+
+    console.log("Exercise answer: dim x; is NOT a valid declaration syntax");
+
+  </script>
+</body>
+</html>

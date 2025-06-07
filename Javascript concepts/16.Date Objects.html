@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Date Objects Demo</title>
+  <style>
+    /* Styling for the date objects demo */
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 10px;
+      color: white;
+      background-color: rgb(22, 22, 22);
+    }
+    input, button, select {
+      padding: 8px;
+      margin: 5px;
+      border: none;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #output {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #444;
+      border-radius: 4px;
+      background-color: #333;
+    }
+    .highlight {
+      background-color: #444;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+    .error {
+      color: #ff4444;
+      font-style: italic;
+    }
+    #action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 10px;
+    }
+    label {
+      margin-right: 10px;
+    }
+    form {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Date Objects Demo</h1>
+  <p>Interact with date objects to explore creation, formats, get/set methods, and comparisons.</p>
+  <form id="date-form">
+    <label for="date-input">Enter Date:</label>
+    <input type="text" id="date-input" placeholder="e.g., 2022-03-25 or Mar 25 2022">
+    <select id="date-format">
+      <option value="iso">ISO (YYYY-MM-DD)</option>
+      <option value="short">Short (MM/DD/YYYY)</option>
+      <option value="long">Long (MMM DD YYYY)</option>
+    </select>
+    <button type="submit">Create Date</button>
+  </form>
+  <form id="numeric-form">
+    <label for="year-input">Year:</label>
+    <input type="number" id="year-input" placeholder="YYYY" min="0">
+    <label for="month-input">Month:</label>
+    <input type="number" id="month-input" placeholder="0-11" min="0" max="11">
+    <label for="day-input">Day:</label>
+    <input type="number" id="day-input" placeholder="1-31" min="1" max="31">
+    <button type="submit">Create Numeric Date</button>
+  </form>
+  <div id="action-buttons">
+    <button id="current-date">Get Current Date</button>
+    <button id="milliseconds">Create from Milliseconds</button>
+    <button id="get-year">Get Year</button>
+    <button id="get-month">Get Month</button>
+    <button id="get-day">Get Day</button>
+    <button id="get-weekday">Get Weekday</button>
+    <button id="get-hours">Get Hours</button>
+    <button id="get-utc">Get UTC Date</button>
+    <button id="set-year">Set Year to 2020</button>
+    <button id="set-month">Set Month to December</button>
+    <button id="add-days">Add 50 Days</button>
+    <button id="compare">Compare with Jan 14, 2100</button>
+    <button id="timezone">Get Timezone Offset</button>
+    <button id="to-date-string">To Date String</button>
+    <button id="to-iso-string">To ISO String</button>
+  </div>
+  <div id="output"></div>
+
+  <script>
+    /*
+     * JavaScript Date Objects Demo
+     * 
+     * This project demonstrates JavaScript Date Object concepts:
+     * 1. Date Creation: new Date(), date strings, year/month/day, milliseconds
+     * 2. Date Formats: ISO, short, long
+     * 3. Get Methods: getFullYear, getMonth, getDate, getDay, getHours, etc.
+     * 4. Set Methods: setFullYear, setMonth, setDate, setHours, etc.
+     * 5. Display Methods: toString, toDateString, toUTCString, toISOString
+     * 6. Time Zones: getTimezoneOffset, UTC methods
+     * 7. Date Comparisons: Comparing dates, calculating differences
+     * 8. Event Handling: Form submission, button clicks, keydown
+     * 
+     * Functionality:
+     * - Create date objects using various constructors
+     * - Parse date strings in different formats
+     * - Extract and modify date components
+     * - Display dates in multiple formats
+     * - Compare dates and handle time zones
+     * - Log interactions to console for learning
+     * - Handle errors for invalid dates
+     */
+
+    // Initialize date object
+    let currentDate = new Date();
+    let interactionId = 0; // Counter for interaction tracking
+
+    // Get DOM elements
+    const dateForm = document.getElementById("date-form");
+    const dateInput = document.getElementById("date-input");
+    const dateFormat = document.getElementById("date-format");
+    const numericForm = document.getElementById("numeric-form");
+    const yearInput = document.getElementById("year-input");
+    const monthInput = document.getElementById("month-input");
+    const dayInput = document.getElementById("day-input");
+    const output = document.getElementById("output");
+    const currentDateBtn = document.getElementById("current-date");
+    const millisecondsBtn = document.getElementById("milliseconds");
+    const getYearBtn = document.getElementById("get-year");
+    const getMonthBtn = document.getElementById("get-month");
+    const getDayBtn = document.getElementById("get-day");
+    const getWeekdayBtn = document.getElementById("get-weekday");
+    const getHoursBtn = document.getElementById("get-hours");
+    const getUtcBtn = document.getElementById("get-utc");
+    const setYearBtn = document.getElementById("set-year");
+    const setMonthBtn = document.getElementById("set-month");
+    const addDaysBtn = document.getElementById("add-days");
+    const compareBtn = document.getElementById("compare");
+    const timezoneBtn = document.getElementById("timezone");
+    const toDateStringBtn = document.getElementById("to-date-string");
+    const toIsoStringBtn = document.getElementById("to-iso-string");
+
+    // Arrays for readable month and day names
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+    // =============================================
+    // 1. WINDOW LOAD EVENT
+    // =============================================
+    window.addEventListener("load", () => {
+      console.log("Window loaded - JavaScript Date Objects Demo ready!");
+      displayDate();
+    });
+
+    // =============================================
+    // 2. DISPLAY DATE FUNCTION
+    // =============================================
+    /*
+     * Displays the current date object in various formats.
+     * Uses template literals for formatted output.
+     */
+    function displayDate(message = "Current Date:") {
+      if (isNaN(currentDate.getTime())) {
+        output.innerHTML = '<p class="error">Invalid Date!</p>';
+        return;
+      }
+      const outputHTML = `
+        <h3>${message}</h3>
+        <p>Default: <span class="highlight">${currentDate.toString()}</span></p>
+        <p>Date String: <span class="highlight">${currentDate.toDateString()}</span></p>
+        <p>UTC String: <span class="highlight">${currentDate.toUTCString()}</span></p>
+        <p>ISO String: <span class="highlight">${currentDate.toISOString()}</span></p>
+        <p>Milliseconds since 1970: <span class="highlight">${currentDate.getTime()}</span></p>
+      `;
+      output.innerHTML = outputHTML;
+    }
+
+    // =============================================
+    // 3. DATE FORM SUBMIT EVENT (PARSE DATE STRING)
+    // =============================================
+    dateForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const dateStr = dateInput.value.trim();
+      const format = dateFormat.value;
+      interactionId++;
+
+      if (!dateStr) {
+        output.innerHTML = '<p class="error">Please enter a date!</p>';
+        console.log("Date form submit failed - Empty input");
+        return;
+      }
+
+      try {
+        currentDate = new Date(dateStr);
+        if (isNaN(currentDate.getTime())) throw new Error("Invalid date format");
+        displayDate(`Created Date from ${format.toUpperCase()} Format:`);
+        console.log(`Created date from "${dateStr}" (${format}) (Interaction #${interactionId})`);
+      } catch (e) {
+        output.innerHTML = `<p class="error">Error: ${e.message}</p>`;
+        console.log(`Error parsing date: ${e.message} (Interaction #${interactionId})`);
+      }
+      dateInput.value = "";
+    });
+
+    // =============================================
+    // 4. NUMERIC FORM SUBMIT EVENT (YEAR/MONTH/DAY)
+    // =============================================
+    numericForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const year = parseInt(yearInput.value);
+      const month = parseInt(monthInput.value);
+      const day = parseInt(dayInput.value);
+      interactionId++;
+
+      if (isNaN(year) || isNaN(month)) {
+        output.innerHTML = '<p class="error">Year and month are required!</p>';
+        console.log("Numeric form submit failed - Invalid input");
+        return;
+      }
+
+      try {
+        currentDate = new Date(year, month, day || 1);
+        if (isNaN(currentDate.getTime())) throw new Error("Invalid date");
+        displayDate(`Created Date from Numeric Input:`);
+        console.log(`Created date: ${year}-${month}-${day || 1} (Interaction #${interactionId})`);
+      } catch (e) {
+        output.innerHTML = `<p class="error">Error: ${e.message}</p>`;
+        console.log(`Error creating date: ${e.message} (Interaction #${interactionId})`);
+      }
+      yearInput.value = "";
+      monthInput.value = "";
+      dayInput.value = "";
+    });
+
+    // =============================================
+    // 5. GET CURRENT DATE
+    // =============================================
+    currentDateBtn.addEventListener("click", () => {
+      interactionId++;
+      currentDate = new Date();
+      displayDate("Current Date:");
+      console.log(`Set to current date (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 6. CREATE FROM MILLISECONDS
+    // =============================================
+    millisecondsBtn.addEventListener("click", () => {
+      interactionId++;
+      currentDate = new Date(100000000000); // Example: 100 billion ms
+      displayDate("Date from 100 Billion Milliseconds:");
+      console.log(`Created date from 100000000000 ms (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 7. GET YEAR
+    // =============================================
+    getYearBtn.addEventListener("click", () => {
+      interactionId++;
+      if (isNaN(currentDate.getTime())) {
+        output.innerHTML = '<p class="error">Invalid Date!</p>';
+        return;
+      }
+      const year = currentDate.getFullYear();
+      output.innerHTML = `
+        <h3>Get Year:</h3>
+        <p>Date: <span class="highlight">${currentDate.toDateString()}</span></p>
+        <p>Year: <span class="highlight">${year}</span></p>
+      `;
+      console.log(`Got year: ${year} (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 8. GET MONTH
+    // =============================================
+    getMonthBtn.addEventListener("click", () => {
+      interactionId++;
+      if (isNaN(currentDate.getTime())) {
+        output.innerHTML = '<p class="error">Invalid Date!</p>';
+        return;
+      }
+      const monthNum = currentDate.getMonth();
+      const monthName = months[monthNum];
+      output.innerHTML = `
+        <h3>Get Month:</h3>
+        <p>Date: <span class="highlight">${currentDate.toDateString()}</span></p>
+        <p>Month (0-11): <span class="highlight">${monthNum}</span></p>
+        <p>Month Name: <span class="highlight">${monthName}</span></p>
+      `;
+      console.log(`Got month: ${monthNum} (${monthName}) (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 9. GET DAY
+    // =============================================
+    getDayBtn.addEventListener("click", () => {
+      interactionId++;
+      if (isNaN(currentDate.getTime())) {
+        output.innerHTML = '<p class="error">Invalid Date!</p>';
+        return;
+      }
+      const day = currentDate.getDate();
+      output.innerHTML = `
+        <h3>Get Day:</h3>
+        <p>Date: <span class="highlight">${currentDate.toDateString()}</span></p>
+        <p>Day: <span class="highlight">${day}</span></p>
+      `;
+      console.log(`Got day: ${day} (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 10. GET WEEKDAY
+    // =============================================
+    getWeekdayBtn.addEventListener("click", () => {
+      interactionId++;
+      if (isNaN(currentDate.getTime())) {
+        output.innerHTML = '<p class="error">Invalid Date!</p>';
+        return;
+      }
+      const weekdayNum = currentDate.getDay();
+      const weekdayName = days[weekdayNum];
+      output.innerHTML = `
+        <h3>Get Weekday:</h3>
+        <p>Date: <span class="highlight">${currentDate.toDateString()}</span></p>
+        <p>Weekday (0-6): <span class="highlight">${weekdayNum}</span></p>
+        <p>Weekday Name: <span class="highlight">${weekdayName}</span></p>
+      `;
+      console.log(`Got weekday: ${weekdayNum} (${weekdayName}) (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 11. GET HOURS
+    // =============================================
+    getHoursBtn.addEventListener("click", () => {
+      interactionId++;
+      if (isNaN(currentDate.getTime())) {
+        output.innerHTML = '<p class="error">Invalid Date!</p>';
+        return;
+      }
+      const hours = currentDate.getHours();
+      const minutes = currentDate.getMinutes();
+      const seconds = currentDate.getSeconds();
+      output.innerHTML = `
+        <h3>Get Time:</h3>
+        <p>Date: <span class="highlight">${currentDate.toString()}</span></p>
+        <p>Hours: <span class="highlight">${hours}</span></p>
+        <p>Minutes: <span class="highlight">${minutes}</span></p>
+        <p>Seconds: <span class="highlight">${seconds}</span></p>
+      `;
+      console.log(`Got time: ${hours}:${minutes}:${seconds} (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 12. GET UTC DATE
+    // =============================================
+    getUtcBtn.addEventListener("click", () => {
+      interactionId++;
+      if (isNaN(currentDate.getTime())) {
+        output.innerHTML = '<p class="error">Invalid Date!</p>';
+        return;
+      }
+      const utcYear = currentDate.getUTCFullYear();
+      const utcMonth = currentDate.getUTCMonth();
+      const utcDate = currentDate.getUTCDate();
+      output.innerHTML = `
+        <h3>Get UTC Date:</h3>
+        <p>Local Date: <span class="highlight">${currentDate.toString()}</span></p>
+        <p>UTC Date: <span class="highlight">${utcYear}-${utcMonth + 1}-${utcDate}</span></p>
+      `;
+      console.log(`Got UTC date: ${utcYear}-${utcMonth}-${utcDate} (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 13. SET YEAR
+    // =============================================
+    setYearBtn.addEventListener("click", () => {
+      interactionId++;
+      if (isNaN(currentDate.getTime())) {
+        output.innerHTML = '<p class="error">Invalid Date!</p>';
+        return;
+      }
+      currentDate.setFullYear(2020);
+      displayDate("Set Year to 2020:");
+      console.log(`Set year to 2020 (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 14. SET MONTH
+    // =============================================
+    setMonthBtn.addEventListener("click", () => {
+      interactionId++;
+      if (isNaN(currentDate.getTime())) {
+        output.innerHTML = '<p class="error">Invalid Date!</p>';
+        return;
+      }
+      currentDate.setMonth(11); // December
+      displayDate("Set Month to December:");
+      console.log(`Set month to December (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 15. ADD 50 DAYS
+    // =============================================
+    addDaysBtn.addEventListener("click", () => {
+      interactionId++;
+      if (isNaN(currentDate.getTime())) {
+        output.innerHTML = '<p class="error">Invalid Date!</p>';
+        return;
+      }
+      currentDate.setDate(currentDate.getDate() + 50);
+      displayDate("Added 50 Days:");
+      console.log(`Added 50 days (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 16. COMPARE WITH JAN 14, 2100
+    // =============================================
+    compareBtn.addEventListener("click", () => {
+      interactionId++;
+      if (isNaN(currentDate.getTime())) {
+        output.innerHTML = '<p class="error">Invalid Date!</p>';
+        return;
+      }
+      const someday = new Date(2100, 0, 14);
+      const diffMs = someday - currentDate;
+      const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+      const result = currentDate < someday ? "is before" : "is after";
+      output.innerHTML = `
+        <h3>Compare with Jan 14, 2100:</h3>
+        <p>Current Date: <span class="highlight">${currentDate.toDateString()}</span></p>
+        <p>Target Date: <span class="highlight">${someday.toDateString()}</span></p>
+        <p>Result: Current date ${result} Jan 14, 2100</p>
+        <p>Days Difference: <span class="highlight">${diffDays}</span></p>
+      `;
+      console.log(`Compared dates: ${result}, ${diffDays} days (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 17. GET TIMEZONE OFFSET
+    // =============================================
+    timezoneBtn.addEventListener("click", () => {
+      interactionId++;
+      if (isNaN(currentDate.getTime())) {
+        output.innerHTML = '<p class="error">Invalid Date!</p>';
+        return;
+      }
+      const offsetMinutes = currentDate.getTimezoneOffset();
+      const offsetHours = offsetMinutes / 60;
+      output.innerHTML = `
+        <h3>Get Timezone Offset:</h3>
+        <p>Date: <span class="highlight">${currentDate.toString()}</span></p>
+        <p>Timezone Offset: <span class="highlight">${offsetMinutes} minutes (${offsetHours} hours)</span></p>
+      `;
+      console.log(`Got timezone offset: ${offsetMinutes} minutes (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 18. TO DATE STRING
+    // =============================================
+    toDateStringBtn.addEventListener("click", () => {
+      interactionId++;
+      if (isNaN(currentDate.getTime())) {
+        output.innerHTML = '<p class="error">Invalid Date!</p>';
+        return;
+      }
+      displayDate("Displayed as Date String:");
+      console.log(`Displayed as date string (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 19. TO ISO STRING
+    // =============================================
+    toIsoStringBtn.addEventListener("click", () => {
+      interactionId++;
+      if (isNaN(currentDate.getTime())) {
+        output.innerHTML = '<p class="error">Invalid Date!</p>';
+        return;
+      }
+      output.innerHTML = `
+        <h3>Displayed as ISO String:</h3>
+        <p>Date: <span class="highlight">${currentDate.toISOString()}</span></p>
+      `;
+      console.log(`Displayed as ISO string (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 20. KEYDOWN EVENT ON INPUT
+    // =============================================
+    dateInput.addEventListener("keydown", (event) => {
+      const keyPressed = event.key;
+      console.log(`Keydown - Key pressed: ${keyPressed}`);
+      if (keyPressed === "Enter") {
+        console.log("Enter key detected - Date form will submit");
+      }
+    });
+
+  </script>
+</body>
+</html>

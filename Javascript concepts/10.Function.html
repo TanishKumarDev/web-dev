@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Functions Demo</title>
+  <style>
+    /* Basic styling for clarity */
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 10px;
+    }
+    button {
+      padding: 8px;
+      margin: 5px;
+    }
+    #demo {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Functions Demo</h1>
+  <p>This page demonstrates JavaScript functions, including syntax, invocation, parameters, return values, and local variables.</p>
+  <div id="demo">Initial Content</div>
+  <button onclick="updateContent()">Update Temperature</button>
+  <button onclick="showProduct()">Show Product</button>
+
+  <script>
+    /*
+     * JavaScript Functions - Explanation and Demo
+     * 
+     * This demo covers:
+     * 1. Function Syntax: Defining functions with the 'function' keyword
+     * 2. Function Invocation: Calling functions via events, code, or self-invocation
+     * 3. Parameters and Arguments: Passing values to functions
+     * 4. Return Statements: Returning values to the caller
+     * 5. Functions as Variable Values: Using functions in expressions
+     * 6. Local Variables: Scope within functions
+     * 7. Exercises: Function-related outcomes
+     * 
+     * Key Points:
+     * - Functions are reusable blocks of code executed when invoked
+     * - Parameters are defined in (), arguments are passed during invocation
+     * - 'return' stops execution and sends a value back
+     * - Local variables are only accessible within their function
+     * - Accessing a function without () returns the function object
+     * 
+     */
+
+    // =============================================
+    // 1. FUNCTION SYNTAX AND BASIC EXAMPLE
+    // =============================================
+    /*
+     * Functions are defined with the 'function' keyword, a name, parameters in (),
+     * and code in {}. Example: Multiply two numbers.
+     */
+
+    function multiply(p1, p2) {
+      return p1 * p2; // Returns product of parameters
+    }
+
+    let product = multiply(4, 3);
+    console.log("Multiply 4 * 3:", product); // 12
+
+    // =============================================
+    // 2. FUNCTION INVOCATION
+    // =============================================
+    /*
+     * Functions execute when called via:
+     * - Events (e.g., button click)
+     * - Direct JavaScript code
+     * - Self-invocation (immediately invoked function expressions)
+     */
+
+    // Direct invocation
+    function sayHello(name) {
+      return "Hello, " + name + "!";
+    }
+    console.log("Direct invocation:", sayHello("Alice")); // Hello, Alice!
+
+    // Self-invoked function
+    (function() {
+      console.log("Self-invoked function ran!");
+    })(); // Runs immediately
+
+    // Event-based invocation (see button onclick attributes above)
+
+    // =============================================
+    // 3. PARAMETERS AND ARGUMENTS
+    // =============================================
+    /*
+     * Parameters are variables in the function definition.
+     * Arguments are values passed when calling the function.
+     * Parameters act as local variables inside the function.
+     */
+
+    function toCelsius(fahrenheit) {
+      return (5 / 9) * (fahrenheit - 32);
+    }
+
+    let temp = toCelsius(77);
+    console.log("77°F to Celsius:", temp); // 25
+
+    // Incorrect parameters
+    let wrongTemp = toCelsius(); // No argument
+    console.log("No argument (toCelsius()):", wrongTemp); // NaN (undefined - 32)
+
+    // =============================================
+    // 4. RETURN STATEMENTS
+    // =============================================
+    /*
+     * 'return' stops function execution and sends a value back.
+     * Code after 'return' is not executed.
+     */
+
+    function checkNumber(num) {
+      if (num > 0) {
+        return "Positive";
+      }
+      return "Non-positive"; // Executes if num <= 0
+      console.log("This line is never reached");
+    }
+
+    console.log("Check number 5:", checkNumber(5)); // Positive
+    console.log("Check number -2:", checkNumber(-2)); // Non-positive
+
+    // =============================================
+    // 5. FUNCTIONS AS VARIABLE VALUES
+    // =============================================
+    /*
+     * Functions can be used like variables in assignments and expressions.
+     * Example: Using toCelsius directly in a string.
+     */
+
+    let celsiusText = "The temperature is " + toCelsius(77) + " Celsius";
+    console.log("Function as variable value:", celsiusText); // The temperature is 25 Celsius
+
+    // Without (): returns function object
+    let functionObj = toCelsius;
+    console.log("Function without ():", functionObj); // [Function: toCelsius]
+
+    // =============================================
+    // 6. LOCAL VARIABLES
+    // =============================================
+    /*
+     * Variables declared with 'let' or 'const' inside a function are local.
+     * They are created when the function starts and deleted when it ends.
+     */
+
+    function showCar() {
+      let carName = "Volvo";
+      console.log("Inside function:", carName); // Volvo
+    }
+    showCar();
+    // console.log(carName); // Error: carName is not defined
+
+    // Same variable name in different functions
+    function anotherFunction() {
+      let carName = "Toyota";
+      console.log("Another function:", carName); // Toyota
+    }
+    anotherFunction();
+
+    // =============================================
+    // 7. INTERACTIVE DEMO FUNCTIONS
+    // =============================================
+    /*
+     * Functions to update the HTML content when buttons are clicked.
+     */
+
+    function updateContent() {
+      let fahrenheit = 68;
+      let result = "The temperature is " + toCelsius(fahrenheit) + " Celsius";
+      document.getElementById("demo").innerHTML = result;
+      console.log("Updated content:", result); // The temperature is 20 Celsius
+      return result;
+    }
+
+    function showProduct() {
+      let result = "Product of 6 and 7 is " + multiply(6, 7);
+      document.getElementById("demo").innerHTML = result;
+      console.log("Product result:", result); // Product of 6 and 7 is 42
+      return result;
+    }
+
+    // Initial call
+    updateContent();
+
+    // =============================================
+    // 8. EXERCISES
+    // =============================================
+    /*
+     * Exercise 1: What is the keyword to define a function?
+     * Correct Answer: function
+     * 
+     * Exercise 2: What is the result of: let x = toCelsius(32);
+     * Correct Answer: 0 (Celsius equivalent of 32°F)
+     * 
+     * Exercise 3: What happens if you call toCelsius without ()?
+     * Correct Answer: Returns the function object, not the result
+     */
+
+    console.log("Exercise 1 answer: Keyword is 'function'");
+    console.log("Exercise 2 answer: toCelsius(32) = 0 (Celsius)");
+    console.log("Exercise 3 answer: toCelsius without () returns function object");
+
+  </script>
+</body>
+</html>

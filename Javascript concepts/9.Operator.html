@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Operators Demo</title>
+  <style>
+    /* Basic styling for clarity */
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 10px;
+    }
+    button {
+      padding: 8px;
+      margin: 5px;
+    }
+    #demo {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Operators Demo</h1>
+  <p>This page demonstrates JavaScript operators with string and number examples.</p>
+  <div id="demo">Initial Content</div>
+  <button onclick="updateContent()">Update Content</button>
+
+  <script>
+    /*
+     * JavaScript Operators, Arithmetic, and Assignment - Explanation and Demo
+     * 
+     * This guide explains the W3Schools tutorials, covering:
+     * 1. Arithmetic Operators: +, -, *, **, /, %, ++, --
+     * 2. Assignment Operators: =, +=, -=, *=, /=, %=, **=, etc.
+     * 3. Comparison Operators: ==, ===, !=, !==, >, <, >=, <=
+     * 4. String Operators: + (concatenation), += (concatenation assignment)
+     * 5. Logical Operators: &&, ||, !, &&=, ||=, ??=
+     * 6. Bitwise Operators: &, |, ~, ^, <<, >>, >>>
+     * 7. Type Operators: typeof, instanceof
+     * 8. Operator Precedence: Order of operations
+     * 9. Strings with Operators: Emphasis on string usage
+     * 10. Exercises: Operator outcomes
+     * 
+     * Key Points:
+     * - Operators perform computations on numbers and strings
+     * - String + concatenates; number + adds
+     * - Operator precedence follows mathematical rules
+     * - Logical assignment operators (&&=, ||=, ??=) are ES2020
+     * 
+     * Current Date: June 08, 2025
+     */
+
+    // =============================================
+    // 1. ARITHMETIC OPERATORS
+    // =============================================
+    /*
+     * Arithmetic operators perform math on numbers: +, -, *, **, /, %, ++, --.
+     * Example: Basic arithmetic and string-related operations.
+     */
+
+    let a = 3;
+    let x = (100 + 50) * a; // Addition and multiplication
+    console.log("Arithmetic:", x); // 450
+
+    let num1 = 5, num2 = 2;
+    console.log("Addition:", num1 + num2); // 7
+    console.log("Subtraction:", num1 - num2); // 3
+    console.log("Multiplication:", num1 * num2); // 10
+    console.log("Division:", num1 / num2); // 2.5
+    console.log("Modulus:", num1 % num2); // 1
+    console.log("Exponentiation:", num1 ** 2); // 25
+
+    let inc = 5;
+    inc++; // Increment
+    console.log("Increment:", inc); // 6
+
+    let dec = 5;
+    dec--; // Decrement
+    console.log("Decrement:", dec); // 4
+
+    // Operator precedence
+    let prec = 100 + 50 * 3; // Multiplication first
+    console.log("Precedence (100 + 50 * 3):", prec); // 250
+    let precParen = (100 + 50) * 3; // Parentheses first
+    console.log("Precedence ((100 + 50) * 3):", precParen); // 450
+
+    // =============================================
+    // 2. ASSIGNMENT OPERATORS
+    // =============================================
+    /*
+     * Assignment operators assign values: =, +=, -=, *=, /=, %=, **=, etc.
+     * Example: Assignment with numbers and strings.
+     */
+
+    let assignX = 10;
+    assignX += 5; // assignX = assignX + 5
+    console.log("Addition assignment:", assignX); // 15
+
+    assignX -= 3; // Subtraction
+    console.log("Subtraction assignment:", assignX); // 12
+
+    assignX *= 2; // Multiplication
+    console.log("Multiplication assignment:", assignX); // 24
+
+    assignX /= 4; // Division
+    console.log("Division assignment:", assignX); // 6
+
+    assignX %= 5; // Modulus
+    console.log("Modulus assignment:", assignX); // 1
+
+    assignX **= 3; // Exponentiation
+    console.log("Exponentiation assignment:", assignX); // 1
+
+    let text = "Hello";
+    text += " World"; // String concatenation
+    console.log("String assignment:", text); // Hello World
+
+    // Bitwise assignment
+    let bitX = 10;
+    bitX &= 5; // Bitwise AND
+    console.log("Bitwise AND assignment:", bitX); // 0
+
+    // Logical assignment (ES2020)
+    let logicX = 10;
+    logicX &&= 5; // Assign if logicX is true
+    console.log("Logical AND assignment:", logicX); // 5
+
+    let logicY = 0;
+    logicY ||= 10; // Assign if logicY is false
+    console.log("Logical OR assignment:", logicY); // 10
+
+    let logicZ;
+    logicZ ??= "Default"; // Assign if logicZ is null/undefined
+    console.log("Nullish coalescing assignment:", logicZ); // Default
+
+    // =============================================
+    // 3. COMPARISON OPERATORS
+    // =============================================
+    /*
+     * Comparison operators compare values: ==, ===, !=, !==, >, <, >=, <=.
+     * Example: Compare numbers and strings.
+     */
+
+    let comp1 = 5, comp2 = "5";
+    console.log("Equal (==):", comp1 == comp2); // true (coercion)
+    console.log("Strict equal (===):", comp1 === comp2); // false (type check)
+    console.log("Not equal (!=):", comp1 != comp2); // false
+    console.log("Strict not equal (!==):", comp1 !== comp2); // true
+
+    let str1 = "A", str2 = "B";
+    console.log("String comparison (<):", str1 < str2); // true (alphabetical)
+
+    let strNum1 = "20", strNum2 = "5";
+    console.log("String number comparison (<):", strNum1 < strNum2); // true ("20" < "5" alphabetically)
+
+    console.log("Greater than (>):", 10 > 5); // true
+    console.log("Less than or equal (<=):", 5 <= 5); // true
+
+    // =============================================
+    // 4. STRING OPERATORS
+    // =============================================
+    /*
+     * + concatenates strings; += concatenates and assigns.
+     * Mixing strings and numbers results in strings.
+     * Example: String concatenation.
+     */
+
+    let text1 = "John";
+    let text2 = "Doe";
+    let text3 = text1 + " " + text2;
+    console.log("String concatenation:", text3); // John Doe
+
+    let text4 = "What a very ";
+    text4 += "nice day";
+    console.log("String +=:", text4); // What a very nice day
+
+    let mixed1 = 5 + 5;
+    let mixed2 = "5" + 5;
+    let mixed3 = "Hello" + 5;
+    console.log("Mixed types:", mixed1, mixed2, mixed3); // 10 "55" "Hello5"
+
+    // =============================================
+    // 5. LOGICAL OPERATORS
+    // =============================================
+    /*
+     * Logical operators: && (AND), || (OR), ! (NOT).
+     * Example: Logical operations.
+     */
+
+    let logic1 = true, logic2 = false;
+    console.log("Logical AND (&&):", logic1 && logic2); // false
+    console.log("Logical OR (||):", logic1 || logic2); // true
+    console.log("Logical NOT (!):", !logic1); // false
+
+    // =============================================
+    // 6. BITWISE OPERATORS
+    // =============================================
+    /*
+     * Bitwise operators work on 32-bit numbers: &, |, ~, ^, <<, >>, >>>.
+     * Example: Bitwise operations.
+     */
+
+    console.log("Bitwise AND (&):", 5 & 1); // 1 (0101 & 0001 = 0001)
+    console.log("Bitwise OR (|):", 5 | 1); // 5 (0101 | 0001 = 0101)
+    console.log("Bitwise NOT (~):", ~5); // -6 (inverts bits, 32-bit signed)
+    console.log("Bitwise XOR (^):", 5 ^ 1); // 4 (0101 ^ 0001 = 0100)
+    console.log("Left shift (<<):", 5 << 1); // 10 (0101 << 1 = 1010)
+    console.log("Right shift (>>):", 5 >> 1); // 2 (0101 >> 1 = 0010)
+    console.log("Unsigned right shift (>>>):", 5 >>> 1); // 2
+
+    // =============================================
+    // 7. TYPE OPERATORS
+    // =============================================
+    /*
+     * typeof returns variable type; instanceof checks object type.
+     * Example: Type checks with strings.
+     */
+
+    console.log("typeof string:", typeof "Hello"); // string
+    console.log("typeof number:", typeof 42); // number
+    console.log("instanceof Array:", [] instanceof Array); // true
+
+    // =============================================
+    // 8. STRINGS WITH OPERATORS
+    // =============================================
+    /*
+     * Strings are used with + (concatenation) and comparison operators.
+     * Example: Function with string and number operations.
+     */
+
+    function updateContent() {
+      const prefix = "Result: ";
+      let num = 5;
+      num += 10; // Assignment
+      let str = "JavaScript " + num; // Concatenation
+      let formatted = prefix + str.toUpperCase(); // String manipulation
+      document.getElementById("demo").innerHTML = formatted;
+      console.log("Updated content:", formatted); // Result: JAVASCRIPT 15
+      return formatted;
+    }
+
+    updateContent();
+
+    // =============================================
+    // 9. EXERCISES
+    // =============================================
+    /*
+     * Exercise 1 (Operators): let x = 5; let y = '8'; let z = x + y;
+     * Correct Answer: "58" (string concatenation)
+     * 
+     * Exercise 2 (Arithmetic): let x = 5; x++;
+     * Correct Answer: 6 (increment)
+     * 
+     * Exercise 3 (Assignment): let x = 5; x += 10;
+     * Correct Answer: 15 (addition assignment)
+     */
+
+    console.log("Exercise 1 answer: z = '58' (string concatenation)");
+    console.log("Exercise 2 answer: x = 6 (increment)");
+    console.log("Exercise 3 answer: x = 15 (addition assignment)");
+
+  </script>
+</body>
+</html>

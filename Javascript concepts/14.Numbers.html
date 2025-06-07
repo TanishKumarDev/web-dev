@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Numbers Demo</title>
+  <style>
+    /* Basic styling for the numbers demo */
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 10px;
+      color: white;
+      background-color: rgb(22, 22, 22);
+    }
+    input, button {
+      padding: 8px;
+      margin: 5px;
+      border: none;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #output {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #444;
+      border-radius: 4px;
+      background-color: #333;
+    }
+    .highlight {
+      background-color: #444;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+    .error {
+      color: #ff4444;
+      font-style: italic;
+    }
+    #conversion-buttons {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Numbers Demo</h1>
+  <form id="number-form">
+    <input type="text" id="number-input" placeholder="Enter a number or string" required>
+    <button type="submit">Analyze Number</button>
+  </form>
+  <div id="conversion-buttons">
+    <button id="to-binary">To Binary</button>
+    <button id="to-hex">To Hexadecimal</button>
+    <button id="to-bigint">To BigInt</button>
+  </div>
+  <div id="output"></div>
+  <p>Enter a number or string to analyze its properties and methods. Use buttons to convert to binary, hexadecimal, or BigInt.</p>
+
+  <script>
+    /*
+     * JavaScript Numbers Demo
+     * 
+     * This project demonstrates JavaScript number concepts:
+     * 1. Number Creation: Decimals, scientific notation, and numeric strings
+     * 2. Number Properties: EPSILON, MAX_VALUE, MIN_SAFE_INTEGER, etc.
+     * 3. Number Methods: toString, toFixed, toExponential, parseInt, parseFloat
+     * 4. BigInt: Handling large integers beyond MAX_SAFE_INTEGER
+     * 5. Event Handling: Form submission, button clicks, keydown
+     * 6. Floating-Point Precision: Demonstrating issues like 0.2 + 0.1
+     * 
+     * Functionality:
+     * - Input a number or string to analyze its properties/methods
+     * - Convert to binary/hexadecimal or test BigInt operations
+     * - Display results using template literals
+     * - Log interactions to console for learning
+     * - Handle errors for invalid inputs
+     */
+
+    // Get DOM elements
+    const form = document.getElementById("number-form");
+    const numberInput = document.getElementById("number-input");
+    const output = document.getElementById("output");
+    const toBinaryBtn = document.getElementById("to-binary");
+    const toHexBtn = document.getElementById("to-hex");
+    const toBigIntBtn = document.getElementById("to-bigint");
+
+    // Counter for interaction tracking
+    let interactionId = 0;
+
+    // =============================================
+    // 1. WINDOW LOAD EVENT
+    // =============================================
+    /*
+     * Triggers when the page is fully loaded.
+     * Logs a message to indicate the demo is ready.
+     */
+    window.addEventListener("load", () => {
+      console.log("Window loaded - JavaScript Numbers Demo ready!");
+    });
+
+    // =============================================
+    // 2. FORM SUBMIT EVENT
+    // =============================================
+    /*
+     * Handles form submission to analyze the input number or string.
+     * Uses preventDefault to stop default form behavior.
+     * Validates input and displays results using template literals.
+     */
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const inputText = numberInput.value.trim();
+      interactionId++;
+
+      if (!inputText) {
+        output.innerHTML = '<p class="error">Please enter a number or string!</p>';
+        console.log("Form submit failed - Empty input");
+        return;
+      }
+
+      // Analyze input and display results
+      displayNumberAnalysis(inputText);
+      console.log(`Form submitted - Analyzed input: "${inputText}" (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 3. FUNCTION TO ANALYZE AND DISPLAY NUMBER
+    // =============================================
+    /*
+     * Analyzes the input (number or string) and displays properties/methods.
+     * Handles numeric strings, NaN, and floating-point precision.
+     * Uses template literals for formatted output.
+     */
+    function displayNumberAnalysis(input) {
+      // Convert input to number
+      const num = Number(input);
+      const isValidNumber = !isNaN(num);
+      const isInteger = Number.isInteger(num);
+      const isSafeInteger = Number.isSafeInteger(num);
+      const parsedInt = parseInt(input);
+      const parsedFloat = parseFloat(input);
+      const toFixed = isValidNumber ? num.toFixed(2) : "N/A";
+      const toExponential = isValidNumber ? num.toExponential(2) : "N/A";
+      const toPrecision = isValidNumber ? num.toPrecision(4) : "N/A";
+      const type = typeof num;
+
+      // Demonstrate floating-point precision issue
+      const precisionTest = (0.2 + 0.1).toFixed(2); // Should be 0.3 but may show 0.30 due to IEEE 754
+      const fixedPrecision = ((0.2 * 10 + 0.1 * 10) / 10).toFixed(2);
+
+      // Number properties
+      const maxValue = Number.MAX_VALUE;
+      const epsilon = Number.EPSILON;
+      const maxSafe = Number.MAX_SAFE_INTEGER;
+
+      // Template literal for formatted output
+      const outputHTML = `
+        <h3>Number Analysis:</h3>
+        <p>Input: <span class="highlight">${input}</span></p>
+        <p>Type: ${type}</p>
+        <p>Is Valid Number: ${isValidNumber}</p>
+        <p>Is Integer: ${isInteger}</p>
+        <p>Is Safe Integer: ${isSafeInteger}</p>
+        <p>parseInt: ${parsedInt}</p>
+        <p>parseFloat: ${parsedFloat}</p>
+        <p>toFixed(2): <span class="highlight">${toFixed}</span></p>
+        <p>toExponential(2): <span class="highlight">${toExponential}</span></p>
+        <p>toPrecision(4): <span class="highlight">${toPrecision}</span></p>
+        <h3>Floating-Point Precision Example:</h3>
+        <p>0.2 + 0.1 = <span class="highlight">${precisionTest}</span> (may be inaccurate)</p>
+        <p>Fixed: ((0.2 * 10 + 0.1 * 10) / 10) = <span class="highlight">${fixedPrecision}</span></p>
+        <h3>Number Properties:</h3>
+        <p>Number.MAX_VALUE: <span class="highlight">${maxValue}</span></p>
+        <p>Number.EPSILON: <span class="highlight">${epsilon}</span></p>
+        <p>Number.MAX_SAFE_INTEGER: <span class="highlight">${maxSafe}</span></p>
+      `;
+
+      output.innerHTML = outputHTML;
+    }
+
+    // =============================================
+    // 4. KEYDOWN EVENT ON NUMBER INPUT
+    // =============================================
+    /*
+     * Logs key presses in the input field.
+     * Demonstrates keyboard events and input validation.
+     */
+    numberInput.addEventListener("keydown", (event) => {
+      const keyPressed = event.key;
+      console.log(`Keydown - Key pressed: ${keyPressed}`);
+      if (keyPressed === "Enter") {
+        console.log("Enter key detected - Form will submit");
+      }
+      if (keyPressed === "e") {
+        console.log("Scientific notation 'e' detected - Allowed for numbers");
+      }
+    });
+
+    // =============================================
+    // 5. CONVERSION BUTTONS (BINARY, HEX, BIGINT)
+    // =============================================
+    /*
+     * Adds buttons to convert the input to binary, hexadecimal, or BigInt.
+     * Demonstrates toString with radix and BigInt creation.
+     */
+    toBinaryBtn.addEventListener("click", () => {
+      const input = numberInput.value.trim();
+      if (!input || isNaN(Number(input))) {
+        output.innerHTML = '<p class="error">Enter a valid number for binary conversion!</p>';
+        return;
+      }
+      const num = Number(input);
+      const binary = num.toString(2);
+      output.innerHTML = `
+        <p>Binary Conversion: <span class="highlight">${binary}</span></p>
+      `;
+      console.log(`Converted "${input}" to binary: ${binary}`);
+    });
+
+    toHexBtn.addEventListener("click", () => {
+      const input = numberInput.value.trim();
+      if (!input || isNaN(Number(input))) {
+        output.innerHTML = '<p class="error">Enter a valid number for hexadecimal conversion!</p>';
+        return;
+      }
+      const num = Number(input);
+      const hex = num.toString(16).toUpperCase();
+      output.innerHTML = `
+        <p>Hexadecimal Conversion: <span class="highlight">${hex}</span></p>
+      `;
+      console.log(`Converted "${input}" to hexadecimal: ${hex}`);
+    });
+
+    toBigIntBtn.addEventListener("click", () => {
+      const input = numberInput.value.trim();
+      if (!input || isNaN(Number(input))) {
+        output.innerHTML = '<p class="error">Enter a valid number for BigInt conversion!</p>';
+        return;
+      }
+      try {
+        const bigInt = BigInt(input);
+        const bigIntType = typeof bigInt;
+        const bigIntSquare = bigInt * bigInt;
+        output.innerHTML = `
+          <p>BigInt Conversion: <span class="highlight">${bigInt}</span></p>
+          <p>Type: ${bigIntType}</p>
+          <p>BigInt Squared: <span class="highlight">${bigIntSquare}</span></p>
+        `;
+        console.log(`Converted "${input}" to BigInt: ${bigInt}, Squared: ${bigIntSquare}`);
+      } catch (e) {
+        output.innerHTML = '<p class="error">Invalid input for BigInt conversion!</p>';
+        console.log(`BigInt conversion failed: ${e.message}`);
+      }
+    });
+
+  </script>
+</body>
+</html>

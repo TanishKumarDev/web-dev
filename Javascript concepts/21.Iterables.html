@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Iterables Demo</title>
+  <style>
+    /* Styling for the iterables demo */
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 10px;
+      color: white;
+      background-color: rgb(22, 22, 22);
+    }
+    input, button, select {
+      padding: 8px;
+      margin: 5px;
+      border: none;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #output {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #444;
+      border-radius: 4px;
+      background-color: #333;
+    }
+    .highlight {
+      background-color: #444;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+    .error {
+      color: #ff4444;
+      font-style: italic;
+    }
+    #action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 10px;
+    }
+    label {
+      margin-right: 10px;
+    }
+    form {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Iterables Demo</h1>
+  <p>Explore iterables and for..of loops with strings, arrays, sets, maps, and custom iterables.</p>
+  <form id="iterate-form">
+    <label for="data-input">Enter Data:</label>
+    <input type="text" id="data-input" placeholder="e.g., W3Schools or 2,4,6,8">
+    <select id="data-type">
+      <option value="string">String</option>
+      <option value="array">Array</option>
+      <option value="set">Set</option>
+      <option value="map">Map (e.g., apples:500,bananas:300)</option>
+    </select>
+    <button type="submit">Iterate with for..of</button>
+  </form>
+  <form id="custom-iterable-form">
+    <label for="start-input">Start Value:</label>
+    <input type="number" id="start-input" placeholder="e.g., 10" value="10">
+    <label for="step-input">Step:</label>
+    <input type="number" id="step-input" placeholder="e.g., 10" value="10">
+    <label for="limit-input">Limit:</label>
+    <input type="number" id="limit-input" placeholder="e.g., 100" value="100">
+    <button type="submit">Create Custom Iterable</button>
+  </form>
+  <div id="action-buttons">
+    <button id="next-step">Call Next on Custom Iterable</button>
+    <button id="iterate-manually">Iterate Manually</button>
+    <button id="reset-iterable">Reset Custom Iterable</button>
+  </div>
+  <div id="output"></div>
+
+  <script>
+    /*
+     * JavaScript Iterables Demo
+     * 
+     * This project demonstrates JavaScript iterables and for..of loops:
+     * 1. Iterables: Strings, Arrays, Sets, Maps
+     * 2. for..of: Iterate over iterable elements
+     * 3. Iterator Protocol: next() method, Symbol.iterator
+     * 4. Custom Iterable: Generate sequence (e.g., 10, 20, 30, ...)
+     * 5. Manual Iteration: Call next() directly
+     * 6. Event Handling: Form submission, button clicks, keydown
+     * 
+     * Functionality:
+     * - Iterate over strings, arrays, sets, maps with for..of
+     * - Create a custom iterable with user-defined start, step, limit
+     * - Step through custom iterable with next()
+     * - Iterate manually using iterator object
+     * - Log interactions to console for learning
+     * - Handle errors for invalid inputs
+     */
+
+    // Get DOM elements
+    const iterateForm = document.getElementById("iterate-form");
+    const dataInput = document.getElementById("data-input");
+    const dataTypeSelect = document.getElementById("data-type");
+    const customIterableForm = document.getElementById("custom-iterable-form");
+    const startInput = document.getElementById("start-input");
+    const stepInput = document.getElementById("step-input");
+    const limitInput = document.getElementById("limit-input");
+    const nextStepBtn = document.getElementById("next-step");
+    const iterateManuallyBtn = document.getElementById("iterate-manually");
+    const resetIterableBtn = document.getElementById("reset-iterable");
+    const output = document.getElementById("output");
+
+    let interactionId = 0; // Counter for interaction tracking
+    let customIterable = null; // Store custom iterable object
+    let customIterator = null; // Store iterator for manual stepping
+
+    // =============================================
+    // 1. WINDOW LOAD EVENT
+    // =============================================
+    window.addEventListener("load", () => {
+      console.log("Window loaded - JavaScript Iterables Demo ready!");
+      displayOutput("Welcome to the Iterables Demo!");
+    });
+
+    // =============================================
+    // 2. DISPLAY OUTPUT FUNCTION
+    // =============================================
+    /*
+     * Displays the result of iteration operations.
+     * Uses template literals for formatted output.
+     */
+    function displayOutput(message, content = "") {
+      const outputHTML = `
+        <h3>${message}</h3>
+        ${content}
+      `;
+      output.innerHTML = outputHTML;
+    }
+
+    // =============================================
+    // 3. ITERATE FORM SUBMIT EVENT (FOR..OF)
+    // =============================================
+    iterateForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = dataInput.value.trim();
+      const dataType = dataTypeSelect.value;
+      interactionId++;
+
+      if (!data) {
+        output.innerHTML = '<p class="error">Please enter data!</p>';
+        console.log("Iterate form submit failed - Empty input");
+        return;
+      }
+
+      let iterable;
+      try {
+        if (dataType === "string") {
+          iterable = data;
+        } else if (dataType === "array") {
+          iterable = data.split(",").map(item => item.trim());
+        } else if (dataType === "set") {
+          iterable = new Set(data.split(",").map(item => item.trim()));
+        } else if (dataType === "map") {
+          const pairs = data.split(",").map(item => {
+            const [key, value] = item.split(":").map(s => s.trim());
+            return [key, parseInt(value) || value];
+          });
+          iterable = new Map(pairs);
+        }
+
+        let text = "";
+        for (const x of iterable) {
+          text += dataType === "map" ? `${x[0]}: ${x[1]}<br>` : `${x}<br>`;
+        }
+        displayOutput(`for..of Loop over ${dataType}:`, `
+          <p>Data: <span class="highlight">${data}</span></p>
+          <p>Results:<br>${text || "No results"}</p>
+        `);
+        console.log(`Iterated over ${dataType}: ${data} (Interaction #${interactionId})`);
+      } catch (e) {
+        output.innerHTML = `<p class="error">Error: Invalid ${dataType} format (${e.message})</p>`;
+        console.log(`Error iterating: ${e.message} (Interaction #${interactionId})`);
+      }
+      dataInput.value = "";
+    });
+
+    // =============================================
+    // 4. CUSTOM ITERABLE FORM SUBMIT EVENT
+    // =============================================
+    customIterableForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const start = parseInt(startInput.value);
+      const step = parseInt(stepInput.value);
+      const limit = parseInt(limitInput.value);
+      interactionId++;
+
+      if (isNaN(start) || isNaN(step) || isNaN(limit) || step === 0) {
+        output.innerHTML = '<p class="error">Please enter valid start, step, and limit values!</p>';
+        console.log("Custom iterable form submit failed - Invalid input");
+        return;
+      }
+
+      // Create custom iterable
+      customIterable = {
+        [Symbol.iterator]: function() {
+          let n = start - step; // Start before first value
+          let done = false;
+          return {
+            next() {
+              n += step;
+              if (n > limit) done = true;
+              return { value: n, done: done };
+            }
+          };
+        }
+      };
+
+      // Run for..of to display results
+      let text = "";
+      for (const num of customIterable) {
+        text += `${num}<br>`;
+      }
+      customIterator = customIterable[Symbol.iterator](); // Initialize iterator for manual stepping
+      displayOutput(`Custom Iterable (start: ${start}, step: ${step}, limit: ${limit}):`, `
+        <p>Results:<br>${text || "No results"}</p>
+      `);
+      console.log(`Created custom iterable (start: ${start}, step: ${step}, limit: ${limit}) (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 5. NEXT STEP BUTTON (CALL NEXT())
+    // =============================================
+    nextStepBtn.addEventListener("click", () => {
+      interactionId++;
+      if (!customIterator) {
+        output.innerHTML = '<p class="error">Please create a custom iterable first!</p>';
+        console.log("Next step failed - No custom iterable");
+        return;
+      }
+
+      const result = customIterator.next();
+      displayOutput("Next Step on Custom Iterable:", `
+        <p>Value: <span class="highlight">${result.value}</span></p>
+        <p>Done: <span class="highlight">${result.done}</span></p>
+      `);
+      console.log(`Called next(): {value: ${result.value}, done: ${result.done}} (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 6. ITERATE MANUALLY BUTTON
+    // =============================================
+    iterateManuallyBtn.addEventListener("click", () => {
+      interactionId++;
+      if (!customIterable) {
+        output.innerHTML = '<p class="error">Please create a custom iterable first!</p>';
+        console.log("Manual iteration failed - No custom iterable");
+        return;
+      }
+
+      const iterator = customIterable[Symbol.iterator]();
+      let text = "";
+      while (true) {
+        const result = iterator.next();
+        if (result.done) break;
+        text += `${result.value}<br>`;
+      }
+      displayOutput("Manual Iteration of Custom Iterable:", `
+        <p>Results:<br>${text || "No results"}</p>
+      `);
+      console.log(`Manually iterated custom iterable (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 7. RESET ITERABLE BUTTON
+    // =============================================
+    resetIterableBtn.addEventListener("click", () => {
+      interactionId++;
+      customIterable = null;
+      customIterator = null;
+      displayOutput("Custom Iterable Reset:", `
+        <p>Iterable and iterator have been reset.</p>
+      `);
+      console.log(`Reset custom iterable (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 8. KEYDOWN EVENT ON INPUT
+    // =============================================
+    dataInput.addEventListener("keydown", (event) => {
+      const keyPressed = event.key;
+      console.log(`Keydown - Key pressed: ${keyPressed}`);
+      if (keyPressed === "Enter") {
+        console.log("Enter key detected - Iterate form may submit");
+      }
+    });
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Sets & Maps Demo</title>
+  <style>
+    /* Styling for the Sets and Maps demo */
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 10px;
+      color: white;
+      background-color: rgb(22, 22, 22);
+    }
+    input, button, select {
+      padding: 8px;
+      margin: 5px;
+      border: none;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #output {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #444;
+      border-radius: 4px;
+      background-color: #333;
+    }
+    .highlight {
+      background-color: #444;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+    .error {
+      color: #ff4444;
+      font-style: italic;
+    }
+    #action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 10px;
+    }
+    label {
+      margin-right: 10px;
+    }
+    form {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Sets & Maps Demo</h1>
+  <p>Explore Sets (unique values) and Maps (key-value pairs).</p>
+  <form id="set-form">
+    <label for="set-input">Enter Values (comma-separated):</label>
+    <input type="text" id="set-input" placeholder="e.g., a,b,c">
+    <button type="submit">Create/Add to Set</button>
+    <button type="button" id="check-set">Check Value</button>
+    <button type="button" id="iterate-set">Iterate Set</button>
+  </form>
+  <form id="map-form">
+    <label for="map-input">Enter Key:Value (e.g., apples:500):</label>
+    <input type="text" id="map-input" placeholder="e.g., apples:500">
+    <button type="submit">Set Map Value</button>
+    <button type="button" id="get-map">Get Value</button>
+    <button type="button" id="delete-map">Delete Key</button>
+    <button type="button" id="clear-map">Clear Map</button>
+  </form>
+  <div id="action-buttons">
+    <button id="object-keys">Use Objects as Map Keys</button>
+    <button id="sum-map">Sum Map Values</button>
+    <button id="group-by">Group Fruits by Quantity</button>
+    <button id="set-info">Set Info</button>
+    <button id="map-info">Map Info</button>
+  </div>
+  <div id="output"></div>
+
+  <script>
+    /*
+     * JavaScript Sets & Maps Demo
+     * 
+     * This project demonstrates JavaScript Sets and Maps:
+     * 1. Sets: Create, add(), has(), forEach(), values(), keys(), entries()
+     * 2. Maps: Create, set(), get(), delete(), clear(), forEach(), entries(), keys(), values()
+     * 3. Advanced: Object keys in Maps, sum values, Map.groupBy() (ES2024)
+     * 4. Event Handling: Form submission, button clicks, keydown
+     * 
+     * Functionality:
+     * - Create and manipulate Sets with unique values
+     * - Manage key-value pairs in Maps, including object keys
+     * - Check, iterate, and modify Sets and Maps
+     * - Group data with Map.groupBy()
+     * - Display type and instance info
+     * - Log interactions to console for learning
+     * - Handle errors for invalid inputs
+     */
+
+    // Get DOM elements
+    const setForm = document.getElementById("set-form");
+    const setInput = document.getElementById("set-input");
+    const checkSetBtn = document.getElementById("check-set");
+    const iterateSetBtn = document.getElementById("iterate-set");
+    const mapForm = document.getElementById("map-form");
+    const mapInput = document.getElementById("map-input");
+    const getMapBtn = document.getElementById("get-map");
+    const deleteMapBtn = document.getElementById("delete-map");
+    const clearMapBtn = document.getElementById("clear-map");
+    const objectKeysBtn = document.getElementById("object-keys");
+    const sumMapBtn = document.getElementById("sum-map");
+    const groupByBtn = document.getElementById("group-by");
+    const setInfoBtn = document.getElementById("set-info");
+    const mapInfoBtn = document.getElementById("map-info");
+    const output = document.getElementById("output");
+
+    let interactionId = 0; // Counter for interaction tracking
+    let mySet = new Set(); // Initialize Set
+    let myMap = new Map(); // Initialize Map
+
+    // Sample data for Map.groupBy()
+    const fruitsArray = [
+      { name: "apples", quantity: 300 },
+      { name: "bananas", quantity: 500 },
+      { name: "oranges", quantity: 200 },
+      { name: "kiwi", quantity: 150 }
+    ];
+
+    // =============================================
+    // 1. WINDOW LOAD EVENT
+    // =============================================
+    window.addEventListener("load", () => {
+      console.log("Window loaded - JavaScript Sets & Maps Demo ready!");
+      displayOutput("Welcome to the Sets & Maps Demo!");
+    });
+
+    // =============================================
+    // 2. DISPLAY OUTPUT FUNCTION
+    // =============================================
+    /*
+     * Displays the result of Set or Map operations.
+     * Uses template literals for formatted output.
+     */
+    function displayOutput(message, content = "") {
+      const outputHTML = `
+        <h3>${message}</h3>
+        ${content}
+      `;
+      output.innerHTML = outputHTML;
+    }
+
+    // =============================================
+    // 3. SET FORM SUBMIT EVENT (CREATE/ADD TO SET)
+    // =============================================
+    setForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const values = setInput.value.trim();
+      interactionId++;
+
+      if (!values) {
+        output.innerHTML = '<p class="error">Please enter values!</p>';
+        console.log("Set form submit failed - Empty input");
+        return;
+      }
+
+      try {
+        const valueArray = values.split(",").map(item => item.trim());
+        valueArray.forEach(value => mySet.add(value));
+        const text = [...mySet].join(", ");
+        displayOutput("Set Updated:", `
+          <p>Values: <span class="highlight">${text || "Empty"}</span></p>
+          <p>Size: <span class="highlight">${mySet.size}</span></p>
+        `);
+        console.log(`Added to Set: ${values}, Current Set: ${text} (Interaction #${interactionId})`);
+      } catch (e) {
+        output.innerHTML = `<p class="error">Error: ${e.message}</p>`;
+        console.log(`Error adding to Set: ${e.message} (Interaction #${interactionId})`);
+      }
+      setInput.value = "";
+    });
+
+    // =============================================
+    // 4. CHECK SET BUTTON (HAS())
+    // =============================================
+    checkSetBtn.addEventListener("click", () => {
+      const value = setInput.value.trim();
+      interactionId++;
+
+      if (!value) {
+        output.innerHTML = '<p class="error">Please enter a value to check!</p>';
+        console.log("Check Set failed - Empty input");
+        return;
+      }
+
+      const exists = mySet.has(value);
+      displayOutput(`Check Value "${value}" in Set:`, `
+        <p>Exists: <span class="highlight">${exists}</span></p>
+      `);
+      console.log(`Checked Set for "${value}": ${exists} (Interaction #${interactionId})`);
+      setInput.value = "";
+    });
+
+    // =============================================
+    // 5. ITERATE SET BUTTON (FOR..OF, FOREACH, VALUES, KEYS, ENTRIES)
+    // =============================================
+    iterateSetBtn.addEventListener("click", () => {
+      interactionId++;
+      let forOfText = "";
+      let forEachText = "";
+      let valuesText = "";
+      let keysText = "";
+      let entriesText = "";
+
+      // for..of
+      for (const x of mySet) {
+        forOfText += `${x}<br>`;
+      }
+
+      // forEach
+      mySet.forEach(value => {
+        forEachText += `${value}<br>`;
+      });
+
+      // values()
+      for (const x of mySet.values()) {
+        valuesText += `${x}<br>`;
+      }
+
+      // keys()
+      for (const x of mySet.keys()) {
+        keysText += `${x}<br>`;
+      }
+
+      // entries()
+      for (const [value, val] of mySet.entries()) {
+        entriesText += `[${value}, ${val}]<br>`;
+      }
+
+      displayOutput("Iterate Set:", `
+        <p>for..of:<br>${forOfText || "Empty"}</p>
+        <p>forEach:<br>${forEachText || "Empty"}</p>
+        <p>values():<br>${valuesText || "Empty"}</p>
+        <p>keys():<br>${keysText || "Empty"}</p>
+        <p>entries():<br>${entriesText || "Empty"}</p>
+      `);
+      console.log(`Iterated Set (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 6. MAP FORM SUBMIT EVENT (SET MAP VALUE)
+    // =============================================
+    mapForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const input = mapInput.value.trim();
+      interactionId++;
+
+      if (!input || !input.includes(":")) {
+        output.innerHTML = '<p class="error">Please enter key:value (e.g., apples:500)!</p>';
+        console.log("Map form submit failed - Invalid input");
+        return;
+      }
+
+      try {
+        const [key, value] = input.split(":").map(item => item.trim());
+        const numValue = parseInt(value) || value;
+        myMap.set(key, numValue);
+        const text = [...myMap.entries()].map(([k, v]) => `${k}: ${v}`).join("<br>");
+        displayOutput("Map Updated:", `
+          <p>Key-Value Pairs:<br>${text || "Empty"}</p>
+          <p>Size: <span class="highlight">${myMap.size}</span></p>
+        `);
+        console.log(`Set Map: ${key} = ${numValue}, Current Map: ${JSON.stringify([...myMap])} (Interaction #${interactionId})`);
+      } catch (e) {
+        output.innerHTML = `<p class="error">Error: ${e.message}</p>`;
+        console.log(`Error setting Map: ${e.message} (Interaction #${interactionId})`);
+      }
+      mapInput.value = "";
+    });
+
+    // =============================================
+    // 7. GET MAP BUTTON (GET())
+    // =============================================
+    getMapBtn.addEventListener("click", () => {
+      const key = mapInput.value.trim();
+      interactionId++;
+
+      if (!key) {
+        output.innerHTML = '<p class="error">Please enter a key to get!</p>';
+        console.log("Get Map failed - Empty input");
+        return;
+      }
+
+      const value = myMap.get(key);
+      displayOutput(`Get Value for Key "${key}" in Map:`, `
+        <p>Value: <span class="highlight">${value !== undefined ? value : "Undefined"}</span></p>
+      `);
+      console.log(`Got Map value for "${key}": ${value} (Interaction #${interactionId})`);
+      mapInput.value = "";
+    });
+
+    // =============================================
+    // 8. DELETE MAP BUTTON (DELETE())
+    // =============================================
+    deleteMapBtn.addEventListener("click", () => {
+      const key = mapInput.value.trim();
+      interactionId++;
+
+      if (!key) {
+        output.innerHTML = '<p class="error">Please enter a key to delete!</p>';
+        console.log("Delete Map failed - Empty input");
+        return;
+      }
+
+      const deleted = myMap.delete(key);
+      const text = [...myMap.entries()].map(([k, v]) => `${k}: ${v}`).join("<br>");
+      displayOutput(`Delete Key "${key}" from Map:`, `
+        <p>Deleted: <span class="highlight">${deleted}</span></p>
+        <p>Remaining:<br>${text || "Empty"}</p>
+      `);
+      console.log(`Deleted Map key "${key}": ${deleted} (Interaction #${interactionId})`);
+      mapInput.value = "";
+    });
+
+    // =============================================
+    // 9. CLEAR MAP BUTTON (CLEAR())
+    // =============================================
+    clearMapBtn.addEventListener("click", () => {
+      interactionId++;
+      myMap.clear();
+      displayOutput("Map Cleared:", `
+        <p>Size: <span class="highlight">${myMap.size}</span></p>
+      `);
+      console.log(`Cleared Map (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 10. OBJECT KEYS BUTTON (OBJECTS AS KEYS)
+    // =============================================
+    objectKeysBtn.addEventListener("click", () => {
+      interactionId++;
+      const apples = { name: "Apples" };
+      const bananas = { name: "Bananas" };
+      const oranges = { name: "Oranges" };
+      const objMap = new Map();
+      objMap.set(apples, 500);
+      objMap.set(bananas, 300);
+      objMap.set(oranges, 200);
+
+      const text = [...objMap.entries()].map(([k, v]) => `${k.name}: ${v}`).join("<br>");
+      displayOutput("Map with Object Keys:", `
+        <p>Key-Value Pairs:<br>${text}</p>
+        <p>Size: <span class="highlight">${objMap.size}</span></p>
+      `);
+      console.log(`Created Map with object keys (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 11. SUM MAP VALUES BUTTON
+    // =============================================
+    sumMapBtn.addEventListener("click", () => {
+      interactionId++;
+      let total = 0;
+      for (const value of myMap.values()) {
+        if (typeof value === "number") total += value;
+      }
+      displayOutput("Sum of Map Values:", `
+        <p>Total: <span class="highlight">${total}</span></p>
+      `);
+      console.log(`Summed Map values: ${total} (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 12. GROUP BY BUTTON (MAP.GROUPBY())
+    // =============================================
+    groupByBtn.addEventListener("click", () => {
+      interactionId++;
+      if (typeof Map.groupBy !== "function") {
+        output.innerHTML = '<p class="error">Map.groupBy() is not supported in this browser!</p>';
+        console.log("Map.groupBy() not supported (Interaction #${interactionId})");
+        return;
+      }
+
+      const groupByQuantity = ({ quantity }) => quantity > 200 ? "ok" : "low";
+      const grouped = Map.groupBy(fruitsArray, groupByQuantity);
+      const text = [...grouped.entries()].map(([key, items]) => 
+        `${key}: ${items.map(item => item.name).join(", ")}`
+      ).join("<br>");
+      displayOutput("Group Fruits by Quantity (Map.groupBy):", `
+        <p>Groups:<br>${text}</p>
+      `);
+      console.log(`Grouped fruits by quantity (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 13. SET INFO BUTTON
+    // =============================================
+    setInfoBtn.addEventListener("click", () => {
+      interactionId++;
+      displayOutput("Set Info:", `
+        <p>typeof Set: <span class="highlight">${typeof mySet}</span></p>
+        <p>instanceof Set: <span class="highlight">${mySet instanceof Set}</span></p>
+        <p>Size: <span class="highlight">${mySet.size}</span></p>
+      `);
+      console.log(`Displayed Set info (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 14. MAP INFO BUTTON
+    // =============================================
+    mapInfoBtn.addEventListener("click", () => {
+      interactionId++;
+      displayOutput("Map Info:", `
+        <p>typeof Map: <span class="highlight">${typeof myMap}</span></p>
+        <p>instanceof Map: <span class="highlight">${myMap instanceof Map}</span></p>
+        <p>Size: <span class="highlight">${myMap.size}</span></p>
+      `);
+      console.log(`Displayed Map info (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 15. KEYDOWN EVENT ON INPUT
+    // =============================================
+    setInput.addEventListener("keydown", (event) => {
+      const keyPressed = event.key;
+      console.log(`Keydown - Key pressed: ${keyPressed}`);
+      if (keyPressed === "Enter") {
+        console.log("Enter key detected - Set form may submit");
+      }
+    });
+
+  </script>
+</body>
+</html>

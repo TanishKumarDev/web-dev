@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Math Object Demo</title>
+  <style>
+    /* Styling for the Math object demo */
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 10px;
+      color: white;
+      background-color: rgb(22, 22, 22);
+    }
+    input, button {
+      padding: 8px;
+      margin: 5px;
+      border: none;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #output {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #444;
+      border-radius: 4px;
+      background-color: #333;
+    }
+    .highlight {
+      background-color: #444;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+    .error {
+      color: #ff4444;
+      font-style: italic;
+    }
+    #action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 10px;
+    }
+    label {
+      margin-right: 10px;
+    }
+    form {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    #random-color-box {
+      width: 100px;
+      height: 100px;
+      margin: 10px 0;
+      border: 1px solid #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Math Object Demo</h1>
+  <p>Interact with the Math object to explore constants, methods, and random number generation.</p>
+  <form id="number-form">
+    <label for="number-input">Enter Number:</label>
+    <input type="number" id="number-input" placeholder="e.g., 4.7" step="any">
+    <button type="submit">Apply Math Methods</button>
+  </form>
+  <form id="random-form">
+    <label for="min-input">Min:</label>
+    <input type="number" id="min-input" placeholder="e.g., 1">
+    <label for="max-input">Max:</label>
+    <input type="number" id="max-input" placeholder="e.g., 10">
+    <button type="submit">Generate Random Integer</button>
+  </form>
+  <div id="action-buttons">
+    <button id="constants">Show Constants</button>
+    <button id="random">Generate Random (0-1)</button>
+    <button id="min-max">Find Min/Max</button>
+    <button id="pow">Calculate Power (x²)</button>
+    <button id="sqrt">Calculate Square Root</button>
+    <button id="sin">Calculate Sine (degrees)</button>
+    <button id="cos">Calculate Cosine (degrees)</button>
+    <button id="log">Calculate Natural Log</button>
+    <button id="log2">Calculate Log Base 2</button>
+    <button id="random-color">Random Background Color</button>
+  </div>
+  <div id="random-color-box"></div>
+  <div id="output"></div>
+
+  <script>
+    /*
+     * JavaScript Math Object Demo
+     * 
+     * This project demonstrates JavaScript Math Object and Math.random() concepts:
+     * 1. Math Properties: PI, E, SQRT2, LN2, etc.
+     * 2. Math Methods: round, ceil, floor, trunc, abs, pow, sqrt, sin, cos, etc.
+     * 3. Random Numbers: Math.random(), random integers in range
+     * 4. Trigonometric Functions: sin, cos with degree-to-radian conversion
+     * 5. Logarithmic Functions: log, log2, log10
+     * 6. Min/Max: Finding minimum and maximum values
+     * 7. Event Handling: Form submission, button clicks, keydown
+     * 
+     * Functionality:
+     * - Display Math constants
+     * - Apply Math methods to user-input numbers
+     * - Generate random numbers and integers
+     * - Calculate trigonometric and logarithmic values
+     * - Change background color randomly
+     * - Log interactions to console for learning
+     * - Handle errors for invalid inputs
+     */
+
+    // Get DOM elements
+    const numberForm = document.getElementById("number-form");
+    const numberInput = document.getElementById("number-input");
+    const randomForm = document.getElementById("random-form");
+    const minInput = document.getElementById("min-input");
+    const maxInput = document.getElementById("max-input");
+    const output = document.getElementById("output");
+    const constantsBtn = document.getElementById("constants");
+    const randomBtn = document.getElementById("random");
+    const minMaxBtn = document.getElementById("min-max");
+    const powBtn = document.getElementById("pow");
+    const sqrtBtn = document.getElementById("sqrt");
+    const sinBtn = document.getElementById("sin");
+    const cosBtn = document.getElementById("cos");
+    const logBtn = document.getElementById("log");
+    const log2Btn = document.getElementById("log2");
+    const randomColorBtn = document.getElementById("random-color");
+    const colorBox = document.getElementById("random-color-box");
+
+    let interactionId = 0; // Counter for interaction tracking
+
+    // =============================================
+    // 1. WINDOW LOAD EVENT
+    // =============================================
+    window.addEventListener("load", () => {
+      console.log("Window loaded - JavaScript Math Object Demo ready!");
+      displayOutput("Welcome to the Math Object Demo!");
+    });
+
+    // =============================================
+    // 2. DISPLAY OUTPUT FUNCTION
+    // =============================================
+    /*
+     * Displays the result of Math operations or constants.
+     * Uses template literals for formatted output.
+     */
+    function displayOutput(message, content = "") {
+      const outputHTML = `
+        <h3>${message}</h3>
+        ${content}
+      `;
+      output.innerHTML = outputHTML;
+    }
+
+    // =============================================
+    // 3. NUMBER FORM SUBMIT EVENT (APPLY MATH METHODS)
+    // =============================================
+    numberForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const num = parseFloat(numberInput.value);
+      interactionId++;
+
+      if (isNaN(num)) {
+        output.innerHTML = '<p class="error">Please enter a valid number!</p>';
+        console.log("Number form submit failed - Invalid input");
+        return;
+      }
+
+      const round = Math.round(num);
+      const ceil = Math.ceil(num);
+      const floor = Math.floor(num);
+      const trunc = Math.trunc(num);
+      const abs = Math.abs(num);
+      const sign = Math.sign(num);
+
+      displayOutput(`Math Methods Applied to ${num}:`, `
+        <p>Round: <span class="highlight">${round}</span></p>
+        <p>Ceil: <span class="highlight">${ceil}</span></p>
+        <p>Floor: <span class="highlight">${floor}</span></p>
+        <p>Trunc: <span class="highlight">${trunc}</span></p>
+        <p>Absolute: <span class="highlight">${abs}</span></p>
+        <p>Sign: <span class="highlight">${sign}</span></p>
+      `);
+      console.log(`Applied Math methods to ${num} (Interaction #${interactionId})`);
+      numberInput.value = "";
+    });
+
+    // =============================================
+    // 4. RANDOM FORM SUBMIT EVENT (GENERATE RANDOM INTEGER)
+    // =============================================
+    randomForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const min = parseInt(minInput.value);
+      const max = parseInt(maxInput.value);
+      interactionId++;
+
+      if (isNaN(min) || isNaN(max)) {
+        output.innerHTML = '<p class="error">Please enter valid min and max values!</p>';
+        console.log("Random form submit failed - Invalid input");
+        return;
+      }
+      if (min > max) {
+        output.innerHTML = '<p class="error">Min cannot be greater than max!</p>';
+        console.log("Random form submit failed - Min > Max");
+        return;
+      }
+
+      const randomInt = getRndInteger(min, max);
+      displayOutput(`Random Integer (${min} to ${max}, inclusive):`, `
+        <p>Result: <span class="highlight">${randomInt}</span></p>
+      `);
+      console.log(`Generated random integer: ${randomInt} (Interaction #${interactionId})`);
+      minInput.value = "";
+      maxInput.value = "";
+    });
+
+    // Random integer function (inclusive)
+    function getRndInteger(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // =============================================
+    // 5. SHOW CONSTANTS
+    // =============================================
+    constantsBtn.addEventListener("click", () => {
+      interactionId++;
+      displayOutput("Math Constants:", `
+        <p>Math.PI: <span class="highlight">${Math.PI}</span></p>
+        <p>Math.E: <span class="highlight">${Math.E}</span></p>
+        <p>Math.SQRT2: <span class="highlight">${Math.SQRT2}</span></p>
+        <p>Math.SQRT1_2: <span class="highlight">${Math.SQRT1_2}</span></p>
+        <p>Math.LN2: <span class="highlight">${Math.LN2}</span></p>
+        <p>Math.LN10: <span class="highlight">${Math.LN10}</span></p>
+        <p>Math.LOG2E: <span class="highlight">${Math.LOG2E}</span></p>
+        <p>Math.LOG10E: <span class="highlight">${Math.LOG10E}</span></p>
+      `);
+      console.log(`Displayed Math constants (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 6. GENERATE RANDOM (0-1)
+    // =============================================
+    randomBtn.addEventListener("click", () => {
+      interactionId++;
+      const randomNum = Math.random();
+      displayOutput("Random Number (0 to 1, exclusive):", `
+        <p>Result: <span class="highlight">${randomNum}</span></p>
+      `);
+      console.log(`Generated random number: ${randomNum} (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 7. FIND MIN/MAX
+    // =============================================
+    minMaxBtn.addEventListener("click", () => {
+      interactionId++;
+      const numbers = [0, 150, 30, 20, -8, -200];
+      const min = Math.min(...numbers);
+      const max = Math.max(...numbers);
+      displayOutput("Find Min/Max:", `
+        <p>Numbers: <span class="highlight">${numbers.join(", ")}</span></p>
+        <p>Min: <span class="highlight">${min}</span></p>
+        <p>Max: <span class="highlight">${max}</span></p>
+      `);
+      console.log(`Found min: ${min}, max: ${max} (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 8. CALCULATE POWER (x²)
+    // =============================================
+    powBtn.addEventListener("click", () => {
+      interactionId++;
+      const num = parseFloat(numberInput.value);
+      if (isNaN(num)) {
+        output.innerHTML = '<p class="error">Please enter a number first!</p>';
+        console.log("Power calculation failed - No input");
+        return;
+      }
+      const result = Math.pow(num, 2);
+      displayOutput(`Power (${num}²):`, `
+        <p>Result: <span class="highlight">${result}</span></p>
+      `);
+      console.log(`Calculated ${num}^2 = ${result} (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 9. CALCULATE SQUARE ROOT
+    // =============================================
+    sqrtBtn.addEventListener("click", () => {
+      interactionId++;
+      const num = parseFloat(numberInput.value);
+      if (isNaN(num)) {
+        output.innerHTML = '<p class="error">Please enter a number first!</p>';
+        console.log("Square root calculation failed - No input");
+        return;
+      }
+      if (num < 0) {
+        output.innerHTML = '<p class="error">Cannot calculate square root of negative number!</p>';
+        console.log("Square root calculation failed - Negative input");
+        return;
+      }
+      const result = Math.sqrt(num);
+      displayOutput(`Square Root of ${num}:`, `
+        <p>Result: <span class="highlight">${result}</span></p>
+      `);
+      console.log(`Calculated sqrt(${num}) = ${result} (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 10. CALCULATE SINE (DEGREES)
+    // =============================================
+    sinBtn.addEventListener("click", () => {
+      interactionId++;
+      const num = parseFloat(numberInput.value);
+      if (isNaN(num)) {
+        output.innerHTML = '<p class="error">Please enter a number first!</p>';
+        console.log("Sine calculation failed - No input");
+        return;
+      }
+      const radians = num * Math.PI / 180;
+      const result = Math.sin(radians);
+      displayOutput(`Sine of ${num} Degrees:`, `
+        <p>Radians: <span class="highlight">${radians.toFixed(4)}</span></p>
+        <p>Result: <span class="highlight">${result.toFixed(4)}</span></p>
+      `);
+      console.log(`Calculated sin(${num} deg) = ${result} (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 11. CALCULATE COSINE (DEGREES)
+    // =============================================
+    cosBtn.addEventListener("click", () => {
+      interactionId++;
+      const num = parseFloat(numberInput.value);
+      if (isNaN(num)) {
+        output.innerHTML = '<p class="error">Please enter a number first!</p>';
+        console.log("Cosine calculation failed - No input");
+        return;
+      }
+      const radians = num * Math.PI / 180;
+      const result = Math.cos(radians);
+      displayOutput(`Cosine of ${num} Degrees:`, `
+        <p>Radians: <span class="highlight">${radians.toFixed(4)}</span></p>
+        <p>Result: <span class="highlight">${result.toFixed(4)}</span></p>
+      `);
+      console.log(`Calculated cos(${num} deg) = ${result} (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 12. CALCULATE NATURAL LOG
+    // =============================================
+    logBtn.addEventListener("click", () => {
+      interactionId++;
+      const num = parseFloat(numberInput.value);
+      if (isNaN(num)) {
+        output.innerHTML = '<p class="error">Please enter a number first!</p>';
+        console.log("Log calculation failed - No input");
+        return;
+      }
+      if (num <= 0) {
+        output.innerHTML = '<p class="error">Logarithm undefined for non-positive numbers!</p>';
+        console.log("Log calculation failed - Non-positive input");
+        return;
+      }
+      const result = Math.log(num);
+      displayOutput(`Natural Log of ${num}:`, `
+        <p>Result: <span class="highlight">${result.toFixed(4)}</span></p>
+      `);
+      console.log(`Calculated ln(${num}) = ${result} (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 13. CALCULATE LOG BASE 2
+    // =============================================
+    log2Btn.addEventListener("click", () => {
+      interactionId++;
+      const num = parseFloat(numberInput.value);
+      if (isNaN(num)) {
+        output.innerHTML = '<p class="error">Please enter a number first!</p>';
+        console.log("Log2 calculation failed - No input");
+        return;
+      }
+      if (num <= 0) {
+        output.innerHTML = '<p class="error">Logarithm undefined for non-positive numbers!</p>';
+        console.log("Log2 calculation failed - Non-positive input");
+        return;
+      }
+      const result = Math.log2(num);
+      displayOutput(`Log Base 2 of ${num}:`, `
+        <p>Result: <span class="highlight">${result.toFixed(4)}</span></p>
+      `);
+      console.log(`Calculated log2(${num}) = ${result} (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 14. RANDOM BACKGROUND COLOR
+    // =============================================
+    randomColorBtn.addEventListener("click", () => {
+      interactionId++;
+      const r = getRndInteger(0, 255);
+      const g = getRndInteger(0, 255);
+      const b = getRndInteger(0, 255);
+      const color = `rgb(${r}, ${g}, ${b})`;
+      colorBox.style.backgroundColor = color;
+      displayOutput("Random Background Color:", `
+        <p>RGB: <span class="highlight">${color}</span></p>
+      `);
+      console.log(`Set random color: ${color} (Interaction #${interactionId})`);
+    });
+
+    // =============================================
+    // 15. KEYDOWN EVENT ON INPUT
+    // =============================================
+    numberInput.addEventListener("keydown", (event) => {
+      const keyPressed = event.key;
+      console.log(`Keydown - Key pressed: ${keyPressed}`);
+      if (keyPressed === "Enter") {
+        console.log("Enter key detected - Number form will submit");
+      }
+    });
+
+  </script>
+</body>
+</html>

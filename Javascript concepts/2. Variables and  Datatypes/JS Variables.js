@@ -19,7 +19,6 @@
  * - Identifiers are case-sensitive and follow specific naming rules
  * - JavaScript handles numbers and strings differently in operations
  * 
- * Current Date: June 08, 2025
  */
 
 // =============================================
@@ -37,41 +36,54 @@
  */
 
 // Automatic Declaration (Not Recommended)
-// x = 5; // Automatically declared, global scope
-// y = 6;
-// z = x + y;
-// console.log("Automatic Declaration - x:", x, "y:", y, "z:", z); // x: 5, y: 6, z: 11
+x = 5; // Automatically declared, global scope
+y = 6;
+z = x + y;
+console.log("Automatic Declaration - x:", x, "y:", y, "z:", z); // x: 5, y: 6, z: 11
+
 
 // Using var (Legacy, Avoid Unless Supporting Old Browsers)
-var varX = 5;
-var varY = 6;
+var varX = 1;
+var varY = 2;
 var varZ = varX + varY;
-console.log("var Declaration - x:", varX, "y:", varY, "z:", varZ); // x: 5, y: 6, z: 11
+console.log("var Declaration - varX:", varX, "varY:", varY, "varZ:", varZ); // varX: 1, varY: 2, varZ: 3
 
 // Using let (Modern, Reassignable)
-let letX = 5;
-let letY = 6;
+let letX = 10;
+let letY = 20;
 let letZ = letX + letY;
-console.log("let Declaration - x:", letX, "y:", letY, "z:", letZ); // x: 5, y: 6, z: 11
+console.log("let Declaration - letX:", letX, "letY:", letY, "letZ:", letZ); // letX: 10, letY: 20, letZ: 30
 
 // Using const (Modern, Non-Reassignable)
-const constX = 5;
-const constY = 6;
+const constX = 100;
+const constY = 200;
 const constZ = constX + constY;
-console.log("const Declaration - x:", constX, "y:", constY, "z:", constZ); // x: 5, y: 6, z: 11
+console.log("const Declaration - constX:", constX, "constY:", constY, "constZ:", constZ); // constX: 100, constY: 200, constZ: 300
 
 // Mixed Example (const and let)
-const price1 = 5; // Constant value
-const price2 = 6; // Constant value
-let total = price1 + price2; // Reassignable
-console.log("Mixed Example - price1:", price1, "price2:", price2, "total:", total); // price1: 5, price2: 6, total: 11
+const price1 = 50;
+const price2 = 100;
+let totalPrice = price1 + price2;
+console.log("Mixed Declaration - price1:", price1, "price2:", price2, "totalPrice:", totalPrice); // price1: 50, price2: 100, totalPrice: 150
 
-// Reassigning let
-total = 20; // Valid
-console.log("Reassigned total:", total); // total: 20
+// Reasssing let variable
+let letA = 5;
+letA = 10; // Reassigning let variable
+console.log("Reassigned letA:", letA); // Reassigned letA: 10
+
+
+// Reassigning const variable (will throw an error)
 
 // Reassigning const (will cause error)
-// constX = 10; // Error: Assignment to constant variable
+// constX = 10; // Error: Assignment to constant variable // Uncommenting this line will throw an error
+try {
+    const constA = 15;
+    constA = 20; // This will throw an error
+}
+catch (error) {
+    console.error("Error reassigning constA:", error.message); // Error reassigning constA: Assignment to constant variable.
+}
+
 
 // =============================================
 // 2. WHEN TO USE var, let, OR const
@@ -86,14 +98,19 @@ console.log("Reassigned total:", total); // total: 20
  * 5. Declare variables at the start of a script for clarity
  */
 
-const fixedValue = 100; // Use const for fixed values
-let counter = 0; // Use let for values that change
-counter += 1;
-console.log("const fixedValue:", fixedValue, "let counter:", counter); // fixedValue: 100, counter: 1
+const fixedValue = 42; // Use const for fixed values
+let counter = 0; // Use let for values that will change
+counter++; // Increment counter
+console.log("Counter after increment:", counter); // Counter after increment: 1
 
-// var for legacy code (not recommended)
-var oldStyle = "Legacy";
-console.log("var oldStyle:", oldStyle); // oldStyle: Legacy
+// var for legacy support (not recommended)
+var legacyVariable = "This is a legacy variable"; // Use var only if necessary
+console.log("Legacy Variable:", legacyVariable); // Legacy Variable: This is a legacy variable
+
+// what is legacy code 
+// Legacy code refers to older code that may use outdated practices or technologies, such as using 'var' for variable declaration.
+// what is legacyVariable?
+// Legacy variable is a variable declared using 'var', which is function-scoped and can lead to issues in modern JavaScript.
 
 // =============================================
 // 3. JAVASCRIPT IDENTIFIERS
@@ -112,15 +129,23 @@ console.log("var oldStyle:", oldStyle); // oldStyle: Legacy
  * - Invalid: 1name, let, @price
  */
 
-let personName = "John Doe"; // Descriptive identifier
-let $price = 200; // Dollar sign identifier
-let _count = 10; // Underscore identifier
-console.log("Identifiers - personName:", personName, "$price:", $price, "_count:", _count);
+let validIdentifier = "This is a valid identifier"; // Valid identifier
+let $price = 99.99; // Valid identifier with dollar sign
+let _count = 10; // Valid identifier with underscore
+let totalVolume = 1000; // Valid identifier with multiple words
+// let invalidIdentifier = 1name; // Invalid identifier (starts with a digit)
+
+console.log("Valid Identifiers - validIdentifier:", validIdentifier, "$price:", $price, "_count:", _count, "totalVolume:", totalVolume); // Outputs valid identifiers
+// Invalid identifiers will throw an error if uncommented
+// console.log("Invalid Identifier - invalidIdentifier:", invalidIdentifier); // Uncommenting this line will throw an error
+
 
 // Case sensitivity
-let y = 5;
-let Y = 10;
-console.log("Case Sensitivity - y:", y, "Y:", Y); // y: 5, Y: 10
+let CaseY = 5;
+let Casey = 10;
+console.log("Case Sensitivity - CaseY:", CaseY, "Casey:", Casey); // CaseY: 5, Casey: 10
+// Identifiers cannot be reserved words
+// let let = 20; // This will throw an error if uncommented
 
 // =============================================
 // 4. ASSIGNMENT OPERATOR
@@ -132,6 +157,7 @@ console.log("Case Sensitivity - y:", y, "Y:", Y); // y: 5, Y: 10
  * - Example: x = x + 5 increments x by 5
  */
 
+
 let assignX = 10;
 assignX = assignX + 5; // Assigns 15 to assignX
 console.log("Assignment - assignX:", assignX); // assignX: 15
@@ -140,9 +166,21 @@ console.log("Assignment - assignX:", assignX); // assignX: 15
 assignX += 5; // Equivalent to assignX = assignX + 5
 console.log("Shorthand Assignment - assignX:", assignX); // assignX: 20
 
+// Assignment vs. Equality
+let a = 5; // Assignment
+let b = 10; // Assignment
+let isEqual = (a == b); // Equality check (false)
+console.log("Assignment vs. Equality - a:", a, "b:", b, "isEqual:", isEqual); // Outputs: a: 5, b: 10, isEqual: false
+
+// Using assignment operator to increment
+assignX += 5; // Incrementing assignX by 5
+console.log("After Increment - assignX:", assignX); // Outputs: After Increment - assignX: 15
+
+
 // =============================================
 // 5. DATA TYPES
 // =============================================
+
 
 /*
  * JavaScript variables can hold:
@@ -159,26 +197,24 @@ let answer = 'Yes I am!'; // String with single quotes
 let quotedNumber = "100"; // String, not a number
 console.log("Data Types - pi:", pi, "person:", person, "answer:", answer, "quotedNumber:", quotedNumber);
 
-// Undefined variable
-let carName;
-console.log("Undefined Variable - carName:", carName); // carName: undefined
+
+// undefined variable
+let undefinedVariable; // Declared but not assigned
+console.log("Undefined Variable - undefinedVariable:", undefinedVariable); // Outputs: undefinedVariable: undefined
 
 // Assigning after declaration
-carName = "Volvo";
-console.log("Assigned carName:", carName); // carName: Volvo
-
-// Declaring and assigning
-let carModel = "Toyota";
-console.log("Declared and Assigned - carModel:", carModel); // carModel: Toyota
+undefinedVariable = "Now I have a value"; // Assigning a value later
 
 // =============================================
 // 6. MULTIPLE VARIABLE DECLARATIONS
 // =============================================
 
+
 /*
  * Declare multiple variables in one statement using commas.
  * Can span multiple lines for readability.
  */
+
 
 let student = "Alice", vehicle = "Honda", cost = 300;
 console.log("Multiple Declaration - student:", student, "vehicle:", vehicle, "cost:", cost);
@@ -197,10 +233,10 @@ console.log("Multi-line Declaration - employee:", employee, "brand:", brand, "va
  * var allows re-declaration without losing value (legacy behavior).
  * let and const do not allow re-declaration (causes error).
  */
+var reDeclareVar = "Initial Value";
+var reDeclareVar = "Re-declared Value"; // Allowed with var
+console.log("Re-declared var - reDeclareVar:", reDeclareVar); // Outputs: Re-declared var - reDeclareVar: Re-declared Value
 
-var redeclare = "Initial";
-var redeclare; // No value loss
-console.log("var Redeclaration - redeclare:", redeclare); // redeclare: Initial
 
 // let redeclaration (will cause error)
 // let redeclareLet = "Test";
@@ -228,6 +264,12 @@ console.log("Mixed Types 1 - mixed1:", mixed1); // mixed1: 523
 let mixed2 = 2 + 3 + "5"; // Numbers first, then concatenates
 console.log("Mixed Types 2 - mixed2:", mixed2); // mixed2: 55
 
+let mixed3 = "5" + (2 + 3); // Parentheses force addition first
+console.log("Mixed Types 3 - mixed3:", mixed3); // mixed3: 55
+
+let mixed4 = "5" + 2 * 3; // Multiplication before concatenation
+console.log("Mixed Types 4 - mixed4:", mixed4); // mixed4: 511 (2 * 3 = 6, then concatenated with "5")
+
 // =============================================
 // 9. SPECIAL CHARACTERS IN IDENTIFIERS
 // =============================================
@@ -238,6 +280,7 @@ console.log("Mixed Types 2 - mixed2:", mixed2); // mixed2: 55
  * - _: Often used for "private" variables or aliases
  */
 
+
 let $greeting = "Hello World";
 let $$$ = 2;
 let $myMoney = 5;
@@ -247,6 +290,8 @@ let _lastName = "Johnson";
 let _x = 2;
 let _100 = 5;
 console.log("Underscore - _lastName:", _lastName, "_x:", _x, "_100:", _100);
+
+
 
 // =============================================
 // 10. EXAMPLE: HTML OUTPUT

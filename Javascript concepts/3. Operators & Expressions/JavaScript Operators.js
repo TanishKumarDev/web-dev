@@ -224,3 +224,5 @@ console.log("Bitwise Unsigned Right Shift: 5 >>> 1 =", bitA >>> 1); // 2 (0010)
 let ageForTernary = 20;
 let access = ageForTernary >= 18 ? "Allowed" : "Denied";
 console.log("Ternary: age >= 18 ? 'Allowed' : 'Denied' =", access); // Allowed
+
+

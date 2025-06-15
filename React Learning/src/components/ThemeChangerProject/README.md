@@ -191,7 +191,7 @@ Feel free to fork it and try your own versions — new features, better styles, 
 
 This project is licensed under the MIT License.
 Feel free to use, modify, or share it with proper attribution.
-See the [LICENSE](../../../../LICENSE) file for details.
+See the [LICENSE](../../../LICENSE)) file for details.
 
 ---
 

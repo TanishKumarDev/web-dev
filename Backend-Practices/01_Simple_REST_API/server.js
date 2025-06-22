@@ -59,6 +59,44 @@ app.post('/users/create', (req, res) => {
 
   res.status(201).json(newUser); // Return new user with 201 Created
 });
+// ✅ Route 6: Update Existing User (PUT)
+app.put('/users/:id', (req, res) => {
+  const userId = parseInt(req.params.id);
+  const { name, email } = req.body;
+
+  // Find user by ID
+  const user = users.find(u => u.id === userId);
+  if (!user) {
+    return res.status(404).json({ error: 'User not found' });
+  }
+
+  // Validate input
+  if (!name && !email) {
+    return res.status(400).json({ error: 'At least name or email is required to update' });
+  }
+
+  // Update fields if provided
+  if (name) user.name = name;
+  if (email) user.email = email;
+
+  res.status(200).json({ message: 'User updated successfully', user });
+});
+
+
+// ✅ Route 7: Delete a User (DELETE)
+app.delete('/users/:id', (req, res) => {
+  const userId = parseInt(req.params.id);
+
+  const index = users.findIndex(u => u.id === userId);
+  if (index === -1) {
+    return res.status(404).json({ error: 'User not found' });
+  }
+
+  // Remove user from array
+  const deletedUser = users.splice(index, 1)[0];
+
+  res.status(200).json({ message: 'User deleted successfully', deletedUser });
+});
 
 
 // Start server

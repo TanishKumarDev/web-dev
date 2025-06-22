@@ -202,7 +202,7 @@ Want to upgrade this? Try:
 
 ## 👨‍💻 Author
 
-Built by [Tanish](https://github.com/yourusername) — learning in public!
+Built by [Tanish](https://github.com/TanishKumarDev) — learning in public!
 You’re welcome to contribute, learn, or fork this project.
 
 ---

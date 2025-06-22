@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 
+// Middleware to parse JSON request bodies
+app.use(express.json());
+
 // Dummy data
 const users = [
   { id: 1, name: 'Tanish', email: 'tanish@example.com' },
@@ -34,6 +37,29 @@ app.get('/users/:id', (req, res) => {
 
   res.json(user);
 });
+
+
+// ✅ Route 5: Create New User
+app.post('/users/create', (req, res) => {
+  const { name, email } = req.body;
+
+  // Validate input
+  if (!name || !email) {
+    return res.status(400).json({ error: 'Name and email are required' });
+  }
+
+  // Create new user with auto-incremented ID
+  const newUser = {
+    id: users.length + 1,
+    name,
+    email
+  };
+
+  users.push(newUser); // Add user to array
+
+  res.status(201).json(newUser); // Return new user with 201 Created
+});
+
 
 // Start server
 app.listen(3000, () => {

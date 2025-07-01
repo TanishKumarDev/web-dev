@@ -44,7 +44,7 @@ addTaskBtn.addEventListener('click', () => {
    }, 1000);
     return;
   }
-  // 🧼 Clear message on success
+  // Clear message on success
 messageBox.textContent = '';
 
   // Create a new task object

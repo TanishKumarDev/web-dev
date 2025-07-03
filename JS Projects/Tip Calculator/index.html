@@ -10,23 +10,26 @@
   <h1>Tip Calculator 💸</h1>
 
   <div class="container">
-    <label>Bill Amount:</label>
-    <input type="number" id="billAmount" placeholder="Enter bill amount" />
+  <label>Bill Amount:</label>
+  <input type="number" id="billAmount" placeholder="Enter bill amount" />
 
-    <label>Tip Percentage:</label>
-    <input type="number" id="tipPercentage" placeholder="Enter tip %" />
+  <label>Tip Percentage:</label>
+  <input type="number" id="tipPercentage" placeholder="Enter tip %" />
 
+  <div class="button-group">
     <button id="calculateBtn">Calculate</button>
-
-    <!-- 🧾 Result Area -->
-    <div class="results">
-      <p id="tipAmount">Tip: ₹0.00</p>
-      <p id="totalAmount">Total: ₹0.00</p>
-    </div>
-
-    <!-- ⚠️ Error Message -->
-    <p id="error" class="error-msg"></p>
+    <button id="resetBtn">Reset</button>
   </div>
+
+  <!-- 🧾 Result Area -->
+  <div class="results">
+    <p id="tipAmount">Tip: ₹0.00</p>
+    <p id="totalAmount">Total: ₹0.00</p>
+  </div>
+
+  <!-- ⚠️ Error Message -->
+  <p id="error" class="error-msg"></p>
+</div>
 
   <script src="./js/script.js"></script>
 </body>

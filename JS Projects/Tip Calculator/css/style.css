@@ -1,4 +1,4 @@
-/* Global Reset */
+/* Reset some defaults */
 * {
   margin: 0;
   padding: 0;
@@ -7,9 +7,9 @@
 
 /* Body Styling */
 body {
-  background-color: #121212;
-  color: #ffffff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f6f8fa;
+  color: #232946;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,101 +19,118 @@ body {
 
 /* Heading */
 h1 {
-  margin-bottom: 2rem;
-}
-
-/* Task Input Container */
-div {
   margin-bottom: 1.5rem;
+  color: #0057d9;
+  letter-spacing: 1px;
 }
 
-input#taskInput {
-  padding: 0.5rem 1rem;
-  width: 250px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  outline: none;
-  margin-right: 10px;
-}
-
-/* Add Button */
-button#addTaskBtn {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 6px;
-  background-color: #00aaff;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-button#addTaskBtn:hover {
-  background-color: #0077cc;
-}
-
-/* Task List Container */
-ul#taskList {
-  list-style: none;
+/* Container Styling */
+.container {
+  background-color: #fff;
+  color: #232946;
+  padding: 2rem;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
   width: 100%;
   max-width: 400px;
 }
 
-/* Task Item */
-ul#taskList li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #1f1f1f;
-  padding: 0.75rem 1rem;
-  margin-bottom: 0.75rem;
-  border-radius: 6px;
+/* Labels and Inputs */
+label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #232946;
 }
 
-/* Completed Task Style */
-.completed {
-  text-decoration: line-through;
-  color: #888;
-  flex-grow: 1;
+input[type="number"] {
+  width: 100%;
+  padding: 0.7rem;
+  margin-top: 0.3rem;
+  border-radius: 7px;
+  border: 1.5px solid #d1d9e6;
+  font-size: 1rem;
+  background: #f3f6fa;
+  color: #232946;
+  transition: border 0.2s;
+}
+input[type="number"]:focus {
+  border: 1.5px solid #0057d9;
+  outline: none;
 }
 
-/* Task Action Buttons */
-.completeBtn,
-.deleteBtn {
-  margin-left: 10px;
-  padding: 0.3rem 0.6rem;
+/* Buttons */
+button {
+  padding: 0.7rem 1.2rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 7px;
+  font-size: 1rem;
   cursor: pointer;
-  font-size: 0.9rem;
-  height: 35px;            /* Uniform height */
-  width: 80px;             /* Fixed width to prevent layout shift */
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.04);
+}
+
+#calculateBtn {
+  background-color: #0057d9;
+  color: #fff;
+}
+#calculateBtn:hover {
+  background-color: #003eaa;
+}
+
+#resetBtn {
+  background-color: #f44336;
+  color: #fff;
+}
+#resetBtn:hover {
+  background-color: #c62828;
+}
+
+/* Center button group */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Result Output Styling */
+.results {
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+  color: #0057d9;
+  background: #eaf1fb;
+  border-radius: 7px;
+  padding: 1rem;
   text-align: center;
 }
 
-/* Complete / Undo Button */
-.completeBtn {
-  background-color: #28a745;
-  color: white;
+.results p {
+  margin-bottom: 0.5rem;
 }
 
-.completeBtn:hover {
-  background-color: #1e7e34;
-}
-
-/* Delete Button */
-.deleteBtn {
-  background-color: #dc3545;
-  color: white;
-}
-
-.deleteBtn:hover {
-  background-color: #bd2130;
-}
-
-/* Error Message Style */
+/* Error Message */
 .error-msg {
-  color: red;
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
+  color: #e63946;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  button {
+    width: 100%;
+  }
 }

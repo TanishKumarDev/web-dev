@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ body{
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    transition: background-color 0.4s ease;
+    background-color: #252525;
+    color: rgb(198, 197, 197);
+ }
+
+ button {
+    margin-top: 2rem;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #8bd500de;
+    color: rgb(27, 27, 28);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s; 
+}
+
+button:hover {
+     color: rgba(27, 27, 28, 0.534);
+    background-color: #8ad5008b;
+ }
+
+ .colorCode {
+    font-weight: bold;
+    font-size: 1.5rem;
+ }

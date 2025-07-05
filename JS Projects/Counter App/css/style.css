@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #292727;
+    color: white;
+}
+
+.container {
+    text-align: center;
+}
+
+h1{
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+}
+.counter-display {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    border-radius: 5px;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#increment {
+    background-color: red;
+    color: white;
+}
+
+#decrement {
+    background-color: green;
+    color: rgb(255, 255, 255);
+}
+
+#reset {
+    background-color: blue;
+    color: white;
+}
+#message {
+  color: orange;
+  font-size: 1rem;
+  margin-top: 10px;
+}

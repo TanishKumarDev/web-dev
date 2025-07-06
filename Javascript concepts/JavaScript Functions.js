@@ -1,63 +1,124 @@
-// 💡 What is a Function?
-// A function is a reusable block of code that performs a specific task.
-
-function greet(name){
-    console.log("Hi " + name + "!");
+// Function Declaration (also called Function Definition)
+function greet(name) {
+  return "Hello, " + name;
 }
-greet("Tanish"); // "tanish" is passing arguments
 
-// ✅ Types of Functions in JavaScript
-// 1. 🧾 Function Declaration (Named Function)
-function add(a,b){
-    return a+b;
-}
-console.log(add(5, 3));
+let nameVal = "Tanish";
 
+// Function Call
+console.log(greet(nameVal)); // Output: Hello, Tanish
 
-// 2. 🧠 Function Expression (Anonymous Function) : Stored in a variable:
+// Note: Function declarations are **hoisted** to the top of their scope
+// So you can call them before they are declared in code
 
-const subtract = function(a,b){
-    return a-b;
+// Function Expression
+// A function stored in a variable. This is NOT hoisted.
+
+const multiply = function (x, y) {
+  return x * y;
 };
-console.log(subtract(10,5));
 
-// 3. ⚡ Arrow Function (ES6)
-const multiply = (a,b) => a*b;
-console.log(multiply(2,2));
+console.log(multiply(2, 3)); // Output: 6
 
-// 4. 🧩 Function with Default Parameters
-function greetUser(myname = "Guest"){
-    console.log("welcome, "+ myname);
-}
-greetUser();
-greetUser("tanish");
+// This won't work if you call multiply() before the line it's declared
 
-// 5. 🧺 Function Returning a Value
-function getFullName(firstName, lastName){
-    return firstName + " " + lastName;
-}
+// Arrow Function (ES6+)
+// Shorter syntax. Useful for callbacks, concise logic, and doesn't bind 'this'.
 
-let fullname = getFullName("tanish", "kumar");
-console.log(fullname);
+const divide = (a, b) => {
+  return a / b;
+};
 
-// 6. 🌀 Nested Functions (Closure Basics)
-function outer(){
-    let count = 0;
+console.log(divide(10, 2)); // Output: 5
 
-    function inner(){
-        count++;
-        console.log(count);
-    }
-    return inner;
-}
-const counter = outer();
-counter();
-counter();
-counter();
+// For one-liners, you can omit `return` and `{}`:
+const square = x => x * x;
+console.log(square(4)); // Output: 16
 
-// ✅ Extra: arguments Object (for older functions)
-function showArgs() {
-  console.log(arguments); // array-like object
+
+// Immediately Invoked Function Expression (IIFE)
+// It runs IMMEDIATELY when the interpreter reaches it.
+
+(function () {
+  console.log("This runs immediately!");
+})();
+
+// Modern IIFE with Arrow Function
+(() => {
+  console.log("Arrow IIFE!");
+})();
+
+// Callback Functions
+// Passing a function as an argument to another function
+
+function processData(data, callback) {
+  return callback(data);
 }
 
-showArgs(1, 2, 3);
+const double = (n) => n * 2;
+
+console.log(processData(5, double)); // Output: 10
+
+// Real-world: array methods use callbacks
+const nums = [1, 2, 3];
+const doubled = nums.map((n) => n * 2);
+console.log(doubled); // Output: [2, 4, 6]
+
+// Anonymous Functions
+// Functions without a name, used mostly in callbacks
+
+setTimeout(function () {
+  console.log("This runs after 2 seconds!");
+}, 2000);
+
+// Same using arrow function
+setTimeout(() => {
+  console.log("This also runs after 2 seconds!");
+}, 2000);
+
+
+// Nested Functions (Closure Example)
+// Inner functions can access outer function variables
+
+function outerFun(a) {
+  function innerFun(b) {
+    return a + b;
+  }
+  return innerFun;
+}
+
+const addTen = outerFun(10); // outerFun returns innerFun with a fixed 'a' = 10
+console.log(addTen(5)); // Output: 15
+
+// This is called a CLOSURE — innerFun "remembers" 'a' even after outerFun has returned
+
+// Pure Functions
+// Same input -> same output, no side effects
+
+function pureAdd(a, b) {
+  return a + b;
+}
+
+console.log(pureAdd(1, 2)); // Output: 3
+
+// Not pure (modifies global variable)
+let total = 0;
+function impureAdd(x) {
+  total += x;
+  return total;
+}
+
+// Recap: Arrow Function vs Normal Function
+const obj = {
+  name: "Tanish",
+  regularFunc: function () {
+    console.log("Hello from", this.name); // this = obj
+  },
+  arrowFunc: () => {
+    console.log("Hello from", this.name); // this = window/global, not obj
+  },
+};
+
+obj.regularFunc(); // Hello from Tanish
+obj.arrowFunc();   // Hello from undefined
+

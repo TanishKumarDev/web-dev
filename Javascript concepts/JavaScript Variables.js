@@ -16,7 +16,7 @@ b = 20; // Reassignment allowed
 console.log(b); // Output: 20
 /*
 - Allows reassignment but not redeclaration within the same scope.
-- Not hoisted to the top of the scope (Temporal Dead Zone).
+- hoisted to the top of the scope (Temporal Dead Zone).
  */
 
 // 3. const Keyword
@@ -27,7 +27,7 @@ console.log(num3); // Output: 10
 /*
 - mmutable bindings (cannot reassign the variable).
 - Objects or arrays declared with `const` can have their contents modified, but the variable cannot be reassigned to a new object or array.
-- Not hoisted to the top of the scope (Temporal Dead Zone).
+- hoisted to the top of the scope (Temporal Dead Zone).
  */
 
 // Variable Shadowing

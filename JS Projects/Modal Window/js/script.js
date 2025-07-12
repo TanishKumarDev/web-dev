@@ -41,5 +41,15 @@ modalForm.addEventListener('submit', (event) => {
   hideModal();
 });
 
+// Show succes megge after submission
+modalForm.addEventListener('submit', () => {
+  const successMessage = document.createElement('p');
+  successMessage.textContent = 'Login successful!';
+  successMessage.classList.add('success-message');
+  modal.appendChild(successMessage);
+  setTimeout(() => {
+    successMessage.remove();
+  }, 3000); // Remove message after 3 seconds
+});
 // Initialize modal as hidden
 hideModal();

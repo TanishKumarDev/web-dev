@@ -6,8 +6,8 @@
  * JavaScript has **dynamic typing**: variables can hold any type.
  * Type Conversion is the automatic or manual process of changing a value from one type to another.
  * 
- * ➤ Implicit Conversion (Type Coercion)
- * ➤ Explicit Conversion (Type Casting)
+ * ➤ Implicit Conversion (Type Coercion) mean automatic type conversion
+ * ➤ Explicit Conversion (Type Casting or Type Conversion) mean manual type conversion
  */
 
 // -----------------------------------------------------------------------------
@@ -64,6 +64,28 @@ console.log(Boolean(undefined)); // false
 console.log(Boolean("hello"));  // true
 console.log(Boolean(42));       // true
 
+// Converting to String
+let n = 123;
+let s1 = String(n);  
+let s2 = n.toString();  
+console.log(s1)
+console.log(s2)
+
+// Converting to Number
+let s = "123";
+let n2 = Number(s);  
+let s3 = "12.34";
+let n1 = parseFloat(s3);  
+console.log(n)
+console.log(n1)
+
+// Converting to Boolean
+let str = "hello";
+let b1 = Boolean(str);
+let emptyStr = "";
+let b2 = Boolean(emptyStr);
+console.log(b1)
+console.log(b2)
 // -----------------------------------------------------------------------------
 // ✅ 4. Interview Tricky Questions
 // -----------------------------------------------------------------------------

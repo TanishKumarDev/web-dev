@@ -76,6 +76,7 @@ console.log("Logical Operators:");
 console.log("p && q =", p && q);
 console.log("p || q =", p || q);
 console.log("!p =", !p);
+console.log("!q =", !q);
 
 console.log("\n");
 
@@ -121,3 +122,12 @@ console.log("typeof undefined =", typeof undefined);
 console.log("[] instanceof Array =", [] instanceof Array);
 console.log("{} instanceof Object =", {} instanceof Object);
 console.log("new Date() instanceof Date =", new Date() instanceof Date);
+
+
+
+// ==========================================
+// 9. Unary Operators
+// ==========================================
+
+let aNum= 5;
+console.log(aNum, --aNum, aNum++, aNum);

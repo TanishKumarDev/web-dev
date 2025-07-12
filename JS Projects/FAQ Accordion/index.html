@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>FAQ Accordion</title>
+</head>
+<body>
+  <h1>FAQ Accordion</h1>
+  <div class="faq-container" id="faqContainer">
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false" aria-controls="answer1">
+        What is JavaScript?
+        <span class="toggle-icon"></span>
+      </button>
+      <div class="faq-answer" id="answer1">
+        <p>JavaScript is a programming language used to create interactive web applications.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false" aria-controls="answer2">
+        How do I learn JavaScript?
+        <span class="toggle-icon"></span>
+      </button>
+      <div class="faq-answer" id="answer2">
+        <p>Start with basics like variables and functions, then build projects like this accordion!</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false" aria-controls="answer3">
+        Why use an accordion?
+        <span class="toggle-icon"></span>
+      </button>
+      <div class="faq-answer" id="answer3">
+        <p>Accordions save space and improve UX by showing content only when needed.</p>
+      </div>
+    </div>
+  </div>
+  <script src="./js/script.js"></script>
+</body>
+</html>

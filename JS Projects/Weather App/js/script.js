@@ -16,6 +16,8 @@ async function getCoordinates(city) {
 async function fetchWeather(city) {
   try {
     const { lat, lon, displayName } = await getCoordinates(city);
+    // save to local storage
+    localStorage.setItem('lastCity', city);
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
     const res = await fetch(url);
     const data = await res.json();
@@ -36,9 +38,26 @@ async function fetchWeather(city) {
   }
 }
 
+let errorTimeoutId = null;
+
 function showError(msg) {
   weatherOutput.innerHTML = `<p class="error">${msg}</p>`;
   weatherOutput.classList.add('error');
+  if (errorTimeoutId) clearTimeout(errorTimeoutId);
+  errorTimeoutId = setTimeout(() => {
+    clearError();
+  }, 3000);
+}
+
+function clearError() {
+  if (weatherOutput.classList.contains('error')) {
+    weatherOutput.innerHTML = '';
+    weatherOutput.classList.remove('error');
+  }
+  if (errorTimeoutId) {
+    clearTimeout(errorTimeoutId);
+    errorTimeoutId = null;
+  }
 }
 
 function handleSearch() {
@@ -50,9 +69,16 @@ function handleSearch() {
     showError('Please enter a city name');
   }
 }
-
+window.addEventListener('load', () => {
+  const lastCity = localStorage.getItem('lastCity');
+  if (lastCity) {
+    cityInput.value = lastCity;
+    fetchWeather(lastCity);
+  }
+})
 searchBtn.addEventListener('click', handleSearch);
 cityInput.addEventListener('keypress', e => {
   if (e.key === 'Enter') handleSearch();
 });
+cityInput.addEventListener('input', clearError);
 

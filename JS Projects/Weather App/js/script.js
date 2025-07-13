@@ -3,8 +3,15 @@ const searchBtn = document.querySelector('#searchBtn');
 const weatherOutput = document.querySelector('#weather');
 const GEOCODE_KEY = '1bf76d9f384430868b53aae97e4d645f';
 
+function setLoading() {
+    weatherOutput.innerHTML = '<p>Loading...</p>';
+}
 async function getCoordinates(city) {
+  setLoading(true);
   const res = await fetch(`http://api.positionstack.com/v1/forward?access_key=${GEOCODE_KEY}&query=${encodeURIComponent(city)}`);
+  
+setLoading(false);
+
   const data = await res.json();
   if (!data.data || data.data.length === 0) {
     throw new Error('City not found');

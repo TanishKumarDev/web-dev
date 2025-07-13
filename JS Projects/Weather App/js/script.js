@@ -12,7 +12,7 @@ function setLoading() {
 async function getCoordinates(city) {
   setLoading(true);
   const res = await fetch(
-    `http://api.positionstack.com/v1/forward?access_key=${GEOCODE_KEY}&query=${encodeURIComponent(
+    `https://api.positionstack.com/v1/forward?access_key=${GEOCODE_KEY}&query=${encodeURIComponent(
       city
     )}`
   );

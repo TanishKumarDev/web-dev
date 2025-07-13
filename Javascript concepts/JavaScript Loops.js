@@ -1,38 +1,29 @@
 // 1. JavaScript for Loop
-{
-  for (let i = 1; i < 5; i++) {
-    console.log(i);
-  }
+console.log("For Loop");
+for(let i = 1; i <= 5; i++){
+  console.log("Count: ", i);
 }
+
 // 2. JavaScript while Loop
-{
-  let i = 0;
-  while (i < 5) {
-    console.log("Number: ", i);
-    i++;
-  }
+console.log("While Loop");
+let count = 1;
+while(count <= 5){
+  console.log("Count: ", count);
+  count++;
 }
+
 // 3. JavaScript do-while Loop
-{
-  let i = 0;
-  do {
-    console.log("Iteration:", i);
-    i++;
-  } while (i < 5);
-}
+console.log("Do While loop");
+let count2 = 1;
+do{
+  console.log("Count: ", count2);
+  count2++;
+}while(count2 <= 5);
 
 // 4. JavaScript for-in Loop
-{
-    const obj = {name: "Tanish", age: 25};
-    for (let key in obj) {
-        console.log(key, obj[key]);
-    }
-}
-
-// 5. JavaScript for-of Loop
-{
-    let a  = [1, 2, 3];
-    for (let value of a) {
-        console.log(value);
-    }
+console.log("For-in Loop");
+const obj = {name: "Tanish", age: 21, isStudent: true};
+for(let key in obj){
+  console.log("Key: ", key);
+  console.log("Value: ", obj[key]);
 }

@@ -12,12 +12,12 @@
 // -----------------------------------------------------------------------------
 
 /**
- * 🔹 SyntaxError: Invalid code syntax
- * 🔹 ReferenceError: Using an undeclared variable
- * 🔹 TypeError: Using a value in an unexpected way (e.g., call non-function)
- * 🔹 RangeError: A number out of range
- * 🔹 EvalError: Error related to the eval() function
- * 🔹 URIError: Malformed URI (in decodeURIComponent, encodeURI, etc.)
+ * SyntaxError: Invalid code syntax
+ * ReferenceError: Using an undeclared variable
+ * TypeError: Using a value in an unexpected way (e.g., call non-function)
+ * RangeError: A number out of range
+ * EvalError: Error related to the eval() function
+ * URIError: Malformed URI (in decodeURIComponent, encodeURI, etc.)
  */
 
 // ✅ SyntaxError
@@ -151,10 +151,10 @@ try {
 // -----------------------------------------------------------------------------
 
 /**
- * 🔹 Use try...catch for handling runtime exceptions
- * 🔹 Always validate user input to avoid runtime issues
- * 🔹 `finally` is good for cleanup
- * 🔹 Avoid throwing raw strings, prefer Error objects
- * 🔹 Know error types: SyntaxError, TypeError, ReferenceError, etc.
- * 🔹 JSON.parse and DOM-related APIs often throw
+ * Use try...catch for handling runtime exceptions
+ * Always validate user input to avoid runtime issues
+ * `finally` is good for cleanup
+ * Avoid throwing raw strings, prefer Error objects
+ * Know error types: SyntaxError, TypeError, ReferenceError, etc.
+ * JSON.parse and DOM-related APIs often throw
  */

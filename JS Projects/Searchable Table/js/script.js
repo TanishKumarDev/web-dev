@@ -44,3 +44,14 @@ searchInput.addEventListener('input', (e) => {
   const field = filterField.value; // Get the selected field from the dropdown
   filterUsers(searchTerm, field);
 });
+
+// Optimization: Debounce the search input to reduce the number of filter calls
+let debounceTimeout;
+searchInput.addEventListener('input', (e) => {
+    clearTimeout(debounceTimeout); // 1. Cancel previous timer
+    debounceTimeout = setTimeout(() => { // 2. Set a new delay
+        const searchTerm = e.target.value.trim();
+        const field = filterField.value;
+        filterUsers(searchTerm, field); // 3. Trigger search after pause
+    }, 300); // 300ms = delay before firing
+});

@@ -1,6 +1,7 @@
 // Select DOM elements
 const searchInput = document.querySelector('#searchInput');
 const tableBody = document.querySelector('#tableBody');
+const filterField = document.querySelector('#filterField');
 
 // Sample user data
 const users = [
@@ -27,9 +28,9 @@ function renderTable(data) {
 }
 
 // Function to filter users based on search input
-function filterUsers(searchTerm) {
+function filterUsers(searchTerm, field) {
   const filteredUsers = users.filter(user =>
-    user.name.toLowerCase().includes(searchTerm.toLowerCase()) || user.email.toLowerCase().includes(searchTerm.toLowerCase()) 
+    user[field].toLowerCase().includes(searchTerm.toLowerCase())
   );
   renderTable(filteredUsers);
 }
@@ -40,5 +41,6 @@ renderTable(users);
 // Event listener for search input
 searchInput.addEventListener('input', (e) => {
   const searchTerm = e.target.value.trim();
-  filterUsers(searchTerm);
+  const field = filterField.value; // Get the selected field from the dropdown
+  filterUsers(searchTerm, field);
 });

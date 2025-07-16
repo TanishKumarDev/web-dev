@@ -10,11 +10,12 @@
     <div class="container">
       <h1>Search User Table</h1>
       <div class="searchSection">
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search by name or email..."
-        />
+        <select id="filterField">
+            <option value="name">Name</option>
+            <option value="email">Email</option>
+            <option value="city">City</option>
+        </select>
+        <input type="text" id="searchInput" placeholder="Search..." />
       </div>
       <table id="userTable">
         <thead>

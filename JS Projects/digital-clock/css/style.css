@@ -1,49 +1,60 @@
+/* Basic Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Body styling */
 body {
-    background-color: rgb(0, 0, 0);
-    color: white;
+    font-family: Arial, sans-serif;
+    background-color: #000000;
+    color: #ffffff; /* Changed from #222 for readability on black background */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#clock {
-    display: block; 
-    margin: 40px auto 0 auto; 
+/* Container */
+.container {
+    text-align: center;
+    padding: 30px;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    background-color: #696b6c;
+    min-width: 250px; /* Fixed width to prevent resizing */
+}
+
+/* Clock */
+.clock {
     font-size: 48px;
-    font-family: monospace;
-    padding: 20px;
-    border-radius: 10px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #ffffff; /* Ensure readability */
+    min-width: 200px; /* Ensure enough space for longest time string */
     text-align: center;
-    width: fit-content;
 }
 
-#date {
-    display: block;
-    text-align: center;
-    font-size: 25px;
-    font-family: monospace;
-    margin: 15px auto 0 auto;
-    width: fit-content;
+/* Date */
+.date {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #ffffff;
 }
 
-#toggleFormat {
-    color: aliceblue;
-    background-color: transparent;
-    border: 1px solid white;
-    font-size: 15px;
-    font-family: monospace;
-    margin: 30px auto 0 auto; 
-    display: block;
-    cursor: pointer;
+/* Toggle Button */
+.toggle-btn {
     padding: 10px 20px;
-    border-radius: 10px;
+    font-size: 16px;
+    border: 1px solid #007bff;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s;
 }
-#toggleFormat:hover {
-    color: rgb(225, 223, 223);
-    background-color: #0086fc;
-    border: 1px solid #0086fc;
-    transition: all 0.3s ease-in-out;
+
+.toggle-btn:hover {
+    background-color: #0056b3;
 }

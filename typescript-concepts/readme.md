@@ -1,0 +1,1 @@
+Followed : https://www.geeksforgeeks.org/typescript/typescript-tutorial/

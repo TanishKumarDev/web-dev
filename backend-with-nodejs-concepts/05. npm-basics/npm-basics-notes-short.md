@@ -183,7 +183,22 @@ npm run dev
    console.log(chalk.red("Error!"));
    ```
 5. Run with `node index.js`.
+### Fix #1 — Use ESM imports (Recommended)
 
+#### Step 1: Change your package.json
+
+Add this line at the top level:
+
+"type": "module"
+
+#### Step 2: Use the new Chalk import syntax
+```js
+import chalk from "chalk";
+
+console.log(chalk.green("Success!"));
+console.log(chalk.red("Error!"));
+
+```
 ---
 
 ## 9. Takeaway 📝

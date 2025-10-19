@@ -1,15 +1,10 @@
-console.log('Hello Node.js');  // Purpose: Outputs a simple message
+console.log("Hi")
 
-let arr = [1, 2, 3, 4];  // Purpose: Declares and logs an array
-console.log('Array:', arr);
+let arr = [1, 2, 3, 4, 5];
+console.log("arrays : ", arr)
 
-setTimeout(() => {  // Purpose: Demonstrates async code with a 2-second delay
-  console.log('This message is delayed by 2 seconds');
+setTimeout(() => {
+  console.log("Delayed by 2 seconds")
 }, 2000);
 
-console.log('This is the last line of synchronous code');  // Purpose: Shows sync code runs first
-
-
-/*
- Explanation: Synchronous code (console.log) runs immediately, while setTimeout delays execution, demonstrating Node.js’s non-blocking event loop.
- */
+console.log("This is last line of sync code")

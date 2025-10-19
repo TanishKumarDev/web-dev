@@ -1,22 +1,16 @@
-// index.js
-const firstModule = require('./firstModule');  // Purpose: Imports the module
+const firstModule = require('./firstModule');
 
-// Test the add function
-console.log(firstModule.add(10, 20));  // Output: 30
+// Testing the functions with different inputs
+console.log("Add 20 + 30: ", firstModule.add(20, 30));
+console.log("Subtract 50 - 15: ", firstModule.subtract(50, 15));
+console.log("Multiply 7 * 8: ", firstModule.multiply(7, 8));
+console.log("Divide 100 / 4: ", firstModule.divide(100, 4));
 
-// Test divide with error handling
 try {
-  console.log('Trying to divide by zero');
-  let result = firstModule.divide(0, 0);  // Should throw error
-  console.log('Result:', result);
+  console.log("Trying to divide by zero");
+  let result = firstModule.divide(10, 0);
+  console.log("Result: ", result);
 } catch (error) {
-  console.log('Caught an error:', error.message);  // Output: Divide by zero is not allowed
+  console.log("Caught an error:", error.message);
 }
 
-// Test valid division
-try {
-  let result = firstModule.divide(0, 10);
-  console.log('Result:', result);  // Output: 0
-} catch (error) {
-  console.log('Caught an error:', error.message);
-}

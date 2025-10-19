@@ -1,6 +1,4 @@
-// this is simple function
-function sum(num1, num2) {  // Purpose: Defines a reusable addition function
+function sum(num1, num2) {
   return num1 + num2;
 }
-console.log(sum(2, 3));  // Purpose: Calls the function and logs the result
-// Output: 5
+console.log("Sum : ",sum(2,10));

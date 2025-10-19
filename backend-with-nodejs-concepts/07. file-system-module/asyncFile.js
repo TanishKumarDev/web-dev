@@ -1,29 +1,17 @@
-// Import File System module
 const fs = require('fs');
+const path = require('path');
+
+// Use __dirname to always refer to the current script folder
+const filePath = path.join(__dirname, 'example.txt'); // __dirname ensures Node looks inside 07. file-system-module, not the project root.
 
 // Reading a File (Non-blocking)
-fs.readFile('example.txt', 'utf8', (err, data) => {
-    if (err) {
-        console.error("❌ Error reading file:", err.message);
-        return;
-    }
-    console.log("📖 File Content:\n", data);
+const data = fs.readFileSync(filePath, 'utf8');
+console.log(data);
 
-    // Writing a File (Async)
-    fs.writeFile('output.txt', 'Async write!', (err) => {
-        if (err) {
-            console.error("❌ Error writing file:", err.message);
-        } else {
-            console.log("✅ File written successfully: output.txt");
+// Writing a File (Creates or Overwrites)
+fs.writeFileSync('output.txt', 'Hello, Node.js!');
+console.log("✅ File written successfully: output.txt");
 
-            // Appending to a File (Async)
-            fs.appendFile('output.txt', '\nAsync append', (err) => {
-                if (err) {
-                    console.error("❌ Error appending file:", err.message);
-                } else {
-                    console.log("✅ Data appended successfully: output.txt");
-                }
-            });
-        }
-    });
-});
+// Appending to a File (Does not overwrite)
+fs.appendFileSync('output.txt', '\nAppended line');
+console.log("✅ Data appended successfully: output.txt");

@@ -1,2 +1,2 @@
-Async write!
-Async append
+Hello, Node.js!
+Appended line

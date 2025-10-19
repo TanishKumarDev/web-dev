@@ -1,11 +1,11 @@
 const http = require('http');
 
-// Purpose: Create server and handle requests
 const server = http.createServer((req, res) => {
-  res.end('Hello from Node.js server!'); // Send response and close connection
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello World Talking from Localhost!');
 });
 
-// Start listening on a port
 server.listen(3000, () => {
-  console.log('Server running on port 3000');
-});
+  console.log('Server running on `http://localhost:3000`');
+})

@@ -1,5 +1,6 @@
-// wrapperDemo.js
-const wrapperExplorer = require('./wrapperExplorer');  // Purpose: Imports the module
-console.log('Filename in wrapperDemo.js:', __filename);
-console.log('Directory in wrapperDemo.js:', __dirname);
-wrapperExplorer.greet('S Mukarji');  // Purpose: Calls the exported greet function
+const wrapperExplorer = require('./wrapperExplorer');
+
+console.log('Filename in WrapperDemo.js', __filename)
+console.log('Directory in WrapperDemo.js', __dirname)
+wrapperExplorer.greet('Tanish');
+

@@ -1,18 +1,22 @@
-// firstModule.js
-function add(a, b) {  // Purpose: Adds two numbers
+function add(a, b) {
   return a + b;
 }
 
-function subtract(a, b) {  // Purpose: Subtracts two numbers
+function subtract(a, b) {
   return a - b;
 }
+function multiply(a, b) {
+  return a * b;
+}
 
-function divide(a, b) {  // Purpose: Divides two numbers with error handling
-  if (b === 0) {
-    throw new Error('Divide by zero is not allowed');
-  }
+function divide(a, b) {
   return a / b;
 }
 
-// Export the functions
-module.exports = { add, subtract, divide };
+module.exports = {
+  add,
+  subtract,
+  multiply,
+  divide,
+};
+

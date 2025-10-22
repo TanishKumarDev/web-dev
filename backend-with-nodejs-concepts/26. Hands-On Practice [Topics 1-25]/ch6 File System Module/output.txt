@@ -1,2 +1,0 @@
-Hello, Node.js File System!
-This is appended content!

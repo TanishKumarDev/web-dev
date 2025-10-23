@@ -1,0 +1,11 @@
+A stream is a sequence of data chunks that you can read from or write to gradually instead of loading everything into memory at once.
+
+Streams are built on top of Buffers.
+
+Why use streams?
+
+Handle large files without crashing memory.
+
+Efficient data transfer over network or file system.
+
+Essential for video, audio, and real-time processing.

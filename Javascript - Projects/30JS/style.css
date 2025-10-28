@@ -1,0 +1,75 @@
+/* ===== General Reset ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* ensures padding/border don’t mess with layout */
+  }
+  
+  /* ===== Body Styling ===== */
+  body {
+    font-family: Arial, sans-serif; /* clean readable font */
+    background-color: #000000;      /* light gray background */
+    color: #ffffff;                    /* dark text for contrast */
+    display: flex;                  /* use flexbox for layout */
+    flex-direction: column;         /* vertical stacking */
+    align-items: center;            /* center horizontally */
+    min-height: 100vh;              /* full viewport height */
+  }
+  
+  /* ===== Header Styling ===== */
+  header {
+    text-align: center;             /* center text in header */
+    margin-top: 40px;               /* spacing from top */
+    margin-bottom: 20px;            /* spacing below header */
+  }
+  
+  header h1 {
+    font-size: 2rem;                /* main title size */
+    color: #00ff1a;                    /* slightly darker text */
+  }
+  
+  header p {
+    color: #555;                    /* lighter gray subtitle */
+    margin-top: 8px;
+  }
+  
+  /* ===== Project Container ===== */
+  .project-container {
+    display: grid;                  /* grid layout for cards */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;                      /* spacing between cards */
+    width: 90%;
+    max-width: 1000px;              /* limit maximum width */
+    margin-top: 30px;
+  }
+  
+  /* ===== Project Card Styling ===== */
+  .project-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;                  /* card height */
+    background-color: rgb(31, 30, 30);
+    color: #ffffff;
+    text-decoration: none;          /* remove underline */
+    border-radius: 10px;            /* rounded corners */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* soft shadow */
+    font-weight: bold;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  /* Hover Effect for Cards */
+  .project-card:hover {
+    transform: translateY(-5px);    /* lift card slightly */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* stronger shadow */
+  }
+  
+  /* ===== Footer ===== */
+  footer {
+    margin-top: auto;               /* push footer to bottom */
+    padding: 20px;
+    text-align: center;
+    color: #02ff5a;
+    font-size: 0.9rem;
+  }
+  

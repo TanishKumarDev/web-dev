@@ -1,6 +1,8 @@
 # Node.js Internal Architecture: A Deep Dive
 
-This is a structured organization of the key concepts from the provided transcript on Node.js internals. I've organized it step-by-step as taught in the video, following the logical flow: starting with core components, execution process, event loop phases, practical examples, thread pool usage, and comparisons to other languages. I've included code snippets where mentioned, explanations of outputs, and visualizations based on the described diagrams. The content is condensed for clarity while preserving the original teaching points.
+[Node.js Architecture: Understanding Node.js Architecture](https://medium.com/@ibrahimlanre1890/node-js-architecture-understanding-node-js-architecture-5fb32879b994)
+![Node.js Architecture: Understanding Node.js Architecture](https://www.hostinger.com/ph/tutorials/wp-content/uploads/sites/44/2024/09/nodejs-workflow-diagram.png)
+![Node.js Architecture: Understanding Node.js Architecture](https://admin.wac.co/uploads/Node_js_Architecture_7486a783aa.jpg)
 
 ## 1. Core Components of Node.js
 Node.js is built from two major components:
@@ -33,6 +35,7 @@ When running a command like `node index.js`:
 - **Thread Pool**: 4+ threads for offloading heavy work.
 - Event loop starts after top-level code and registrations.
 
+)
 ## 3. Event Loop Mechanics
 The event loop runs on the main thread and processes tasks in phases. It loops until no tasks are pending.
 

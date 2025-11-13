@@ -1,36 +1,64 @@
-// Variable Hoisting with var
-console.log("Before var declaration: ", x); // ReferenceError: x is not defined
-var x = 10; 
-console.log("After var declaration: ", x);
+// 1. Hoisting with var
+console.log("==1. Hoisting with var==");
 
-// // Variable Hoisting with let (Temporal Dead Zone)
-// console.log("Before let declartion: ", y) // ReferenceError: y is not defined
-let y = 10;
-console.log("After let declaration: ", y);
+console.log("Before var declaration a =",a); // undefined
+var a = 10;
+console.log("Before var declaration a =",a); // undefined
 
-// Function Declaration Hoisting
-sayHello(); // works -> fully hoisted
+/*
+Internally 
 
-function sayHello() {
-    console.log("Hello World");
-}
+var a; // hoisted
+console.log(a);
+a = 10
 
-// Function Expression Hoisting
-// console.log(greet); // undefined (variable hoisted, but not assigned)
-var greet = function() {
-    console.log("Greetings!");
+*/
+
+// 2. Hoisting with let and const
+console.log("==2. Hoisting with let and const==");
+// console.log(b); // ReferenceError: b is not defined
+// let b = 20; // TDZ
+
+// console.log(c); // ReferenceError: c is not defined
+// const c = 30;
+
+// 3. Hoisting with Functions
+// console.log("==3. Hoisting with Functions==");
+// greet();
+// function greet() {
+//     console.log("Hello World");
+// }
+
+// Expression me only var ka undefined hoist hota hai, function body nahi.
+
+// greet();  // TypeError: greet is not a function
+
+// var greet = function() {
+//   console.log("Hello");
+// };
+
+/*
+
+Internally
+
+
+var greet;       // hoisted → undefined
+greet();         // undefined is not a function
+greet = function() {}
+
+*/
+
+// Function Expression (let/const + function)
+console.log("==Function Expression (let/const + function)==");
+
+hello(); // ReferenceError
+
+let hello = function() {
+  console.log("Hi");
 };
-greet(); // Works: "Greetings!"
 
-// Arrow Function (similar to function expression)
-// console.log(arrowFunc); // undefined (variable hoisted, but not assigned)
-var arrowFunc = () => console.log("Arrow Function!");
-arrowFunc(); // Works: "Arrow Function!"
-
-// Example with scope
-function testHoisting() {
-    console.log("Inside function: a =", a); // undefined (hoisted within function scope)
-    var a = 5;
-    console.log("Inside function after declaration: a =", a); // 5
-}
-testHoisting();
+// | Feature                          | var       | let/const   | function declaration | function expression |
+// | -------------------------------- | --------- | ----------- | -------------------- | ------------------- |
+// | Hoisted?                         | Yes       | Yes         | Yes                  | Yes (only variable) |
+// | Value before declaration         | undefined | TDZ (error) | full function        | undefined / TDZ     |
+// | Safe to call before declaration? | No        | No          | Yes                  | No                  |

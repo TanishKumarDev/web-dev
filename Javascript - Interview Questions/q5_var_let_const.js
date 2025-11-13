@@ -1,41 +1,75 @@
-// var: Function scope, hoisting
-console.log("Before var declaration: x =", x); // undefined (hoisted)
+// var
+/**
+ Function scoped
+
+Hoisted with undefined
+
+Redeclaration allowed
+
+Can be updated (reassigned)
+ */
 var x = 10;
-console.log("After var declaration: x =", x); // 10
-var x = 20; // Redeclaration allowed
-console.log("After redeclaration: x =", x); // 20
+var x = 20;   // allowed
+x = 30;       // allowed
 
-// let: Block scope, TDZ
-// console.log("Before let declaration: y =", y); // ReferenceError: Cannot access 'y' before initialization
-let y = 30;
-console.log("After let declaration: y =", y); // 30
-y = 40; // Reassignment allowed
-console.log("After reassignment: y =", y); // 40
-// let y = 50; // SyntaxError: Identifier 'y' has already been declared
 
-// const: Block scope, TDZ, no reassignment
-// console.log("Before const declaration: z =", z); // ReferenceError: Cannot access 'z' before initialization
-const z = 100;
-console.log("After const declaration: z =", z); // 100
-// z = 200; // TypeError: Assignment to constant variable
-// const z = 300; // SyntaxError: Identifier 'z' has already been declared
+// Hoisting behavior:
+console.log(a); // undefined
+var a = 50;
 
-// Block scope example
-function testScope() {
-    if (true) {
-        var a = "var inside block"; // Function-scoped
-        let b = "let inside block"; // Block-scoped
-        const c = "const inside block"; // Block-scoped
-        console.log("Inside block:", a, b, c);
-    }
-    console.log("Outside block, var:", a); // Accessible
-    // console.log("Outside block, let:", b); // ReferenceError: b is not defined
-    // console.log("Outside block, const:", c); // ReferenceError: c is not defined
-}
-testScope();
 
-// const with objects (mutable contents)
-const person = { name: "Alice" };
-person.name = "Bob"; // Allowed: modifying object contents
-console.log("Modified const object:", person); // { name: "Bob" }
-// person = { name: "Charlie" }; // TypeError: Assignment to constant variable
+// let
+/*
+Block scoped ({})
+
+Hoisted, but stays in Temporal Dead Zone
+
+Redeclaration NOT allowed
+
+Update allowed
+*/
+let y = 10;
+// let y = 20;   // error (redeclaration not allowed)
+y = 30;          // allowed
+
+// TDZ behavior:
+// console.log(b); // ReferenceError
+// let b = 100;
+
+// const
+/*
+Block scoped
+
+Hoisted (TDZ same as let)
+
+No redeclaration
+
+No reassignment
+
+Must be initialized at declaration
+ */
+
+const z = 10;
+// z = 20;  // error (cannot reassign)
+
+// const object ke reference ko lock karta hai,
+// object ke content ko nahi.
+
+const user = { name: "Aman" };
+user.name = "Rohan"; // allowed
+
+console.log(user.name);
+
+// | Feature       | var             | let               | const                |
+// | ------------- | --------------- | ----------------- | -------------------- |
+// | Scope         | function        | block             | block                |
+// | Hoisting      | yes (undefined) | yes (TDZ)         | yes (TDZ)            |
+// | Redeclaration | allowed         | not allowed       | not allowed          |
+// | Reassignment  | allowed         | allowed           | not allowed          |
+// | Default use   | Avoid           | Use for variables | Use for fixed values |
+
+/*
+var is function-scoped and hoisted with undefined.
+let and const are block-scoped and hoisted to the TDZ.
+let can be reassigned, const cannot.
+*/
